@@ -128,3 +128,12 @@ body:has(#landing-view:not([hidden])){background:#10291c}
 .phase-card p{margin:0;color:#e6d4aa;font-size:1.05rem}
 .phases-source{font-size:.85rem;margin-top:28px!important;color:#5c513a}
 @media(max-width:700px){.phases-list{grid-template-columns:1fr}.phase-card{padding:17px}.phase-card-icon{flex-basis:55px;width:55px;height:55px;font-size:2.5rem}.lunar-phases-page{margin:12px!important}}
+
+/* Página independente: ingressos nos signos de 2027. */
+.ingresses-count{text-align:center;font-weight:700;color:#31503b;margin:8px 0 20px!important}
+.ingresses-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ingress-card{display:flex;align-items:center;gap:17px;padding:19px 22px;background:linear-gradient(130deg,#153823,#28513a);color:#f8e6bc;border:2px solid #cfa85d;border-radius:17px;min-height:110px}
+.ingress-card-symbol{display:grid;place-items:center;flex:0 0 60px;width:60px;height:60px;border-radius:50%;font-size:2.7rem;line-height:1;color:#edcb7e;background:#0b2417}
+.ingress-card h3{margin:0 0 8px;font-size:1.25rem;color:#f8e6bc}
+.ingress-card p{margin:0;color:#e6d4aa;font-size:1rem}
+@media(max-width:700px){.ingresses-list{grid-template-columns:1fr}.ingress-card{padding:15px}.ingress-card-symbol{flex-basis:52px;width:52px;height:52px;font-size:2.3rem}}
