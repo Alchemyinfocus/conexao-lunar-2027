@@ -37,5 +37,32 @@ const phaseIcons={nova:'●',crescente:'◐',cheia:'○',minguante:'◑'};
 const phaseEvents=phaseRows.map(([utc,type])=>({date:new Date(utc+'Z'),type}));
 function localParts(date){const parts=new Intl.DateTimeFormat('en-CA',{timeZone:$('timezone').value,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(date);const v=Object.fromEntries(parts.map(p=>[p.type,p.value]));return {key:v.year+'-'+v.month+'-'+v.day,time:v.hour+':'+v.minute}}
 function selectedKey(){return '2027-'+String(state.month+1).padStart(2,'0')+'-'+String(state.day).padStart(2,'0')}
-function renderPhase(){const today=selectedKey(),matches=phaseEvents.filter(p=>localParts(p.date).key===today);const current=Date.parse(today+'T12:00:00Z');const prev=[...phaseEvents].reverse().find(p=>p.date.getTime()<=current);const next=phaseEvents.find(p=>p.date.getTime()>current);const info=$('phase-info');info.replaceChildren();if(matches.length){matches.forEach(p=>{const line=document.createElement('p');line.className='phase-event';line.textContent=phaseIcons[p.type]+' '+phaseNames[p.type]+' — '+localParts(p.date).time+' ('+$('timezone').selectedOptions[0].text+')';info.append(line)})}else{const p=document.createElement('p');p.textContent='Nenhuma das quatro fases principais ocorre nesta data.';info.append(p)}const near=document.createElement('p');near.className='phase-near';near.textContent='Próxima fase: '+(next?phaseNames[next.type]+' — '+new Intl.DateTimeFormat('pt-BR',{timeZone:$('timezone').value,day:'2-digit',month:'long',hour:'2-digit',minute:'2-digit'}).format(next.date):'fora de 2027');info.append(near);document.querySelectorAll('#calendar-grid .day').forEach(b=>{const k='2027-'+String(state.month+1).padStart(2,'0')+'-'+String(Number(b.textContent)).padStart(2,'0');const ev=phaseEvents.find(p=>localParts(p.date).key===k);if(ev){b.classList.add('phase-day');const label=document.createElement('small');label.className='phase-marker';label.textContent=phaseIcons[ev.type];label.title=phaseNames[ev.type];b.append(label);b.setAttribute('aria-label',b.getAttribute('aria-label')+', '+phaseNames[ev.type])}})}
+function renderPhase(){updateMoonVisual();const today=selectedKey(),matches=phaseEvents.filter(p=>localParts(p.date).key===today);const current=Date.parse(today+'T12:00:00Z');const prev=[...phaseEvents].reverse().find(p=>p.date.getTime()<=current);const next=phaseEvents.find(p=>p.date.getTime()>current);const info=$('phase-info');info.replaceChildren();if(matches.length){matches.forEach(p=>{const line=document.createElement('p');line.className='phase-event';line.textContent=phaseIcons[p.type]+' '+phaseNames[p.type]+' — '+localParts(p.date).time+' ('+$('timezone').selectedOptions[0].text+')';info.append(line)})}else{const p=document.createElement('p');p.textContent='Nenhuma das quatro fases principais ocorre nesta data.';info.append(p)}const near=document.createElement('p');near.className='phase-near';near.textContent='Próxima fase: '+(next?phaseNames[next.type]+' — '+new Intl.DateTimeFormat('pt-BR',{timeZone:$('timezone').value,day:'2-digit',month:'long',hour:'2-digit',minute:'2-digit'}).format(next.date):'fora de 2027');info.append(near);document.querySelectorAll('#calendar-grid .day').forEach(b=>{const k='2027-'+String(state.month+1).padStart(2,'0')+'-'+String(Number(b.textContent)).padStart(2,'0');const ev=phaseEvents.find(p=>localParts(p.date).key===k);if(ev){b.classList.add('phase-day');const label=document.createElement('small');label.className='phase-marker';label.textContent=phaseIcons[ev.type];label.title=phaseNames[ev.type];b.append(label);b.setAttribute('aria-label',b.getAttribute('aria-label')+', '+phaseNames[ev.type])}})}
+/* Representação aproximada baseada na fração do ciclo sinódico entre Luas Novas.
+   Não substitui efemérides de posição/iluminação lunar de alta precisão. */
+function updateMoonVisual(){
+ const selected=new Date(Date.UTC(2027,state.month,state.day,12));
+ const newMoons=phaseEvents.filter(e=>e.type==='nova').map(e=>e.date.getTime());
+ const anchor=Date.parse('2026-12-09T00:00:00Z');
+ const prev=[anchor,...newMoons].filter(t=>t<=selected.getTime()).pop();
+ const next=newMoons.find(t=>t>selected.getTime())??prev+29.530588853*86400000;
+ const fraction=Math.max(0,Math.min(1,(selected.getTime()-prev)/(next-prev)));
+ const illuminated=(1-Math.cos(2*Math.PI*fraction))/2;
+ const waxing=fraction<.5;
+ const disk=$('dynamic-moon');
+ if(!disk)return;
+ const width=Math.abs(Math.cos(2*Math.PI*fraction))*100;
+ const shadow=illuminated<.5?'#102b20':'#ead49e';
+ const base=illuminated<.5?'#ead49e':'#102b20';
+ disk.style.background=base;
+ disk.style.setProperty('--moon-shadow',shadow);
+ disk.style.setProperty('--moon-width',width+'%');
+ disk.style.setProperty('--moon-side',waxing?'right':'left');
+ disk.style.setProperty('--moon-fraction',String(fraction));
+ const stage=fraction<.035||fraction>.965?'Lua Nova':fraction<.215?'Lua Crescente':fraction<.285?'Quarto Crescente':fraction<.465?'Gibosa Crescente':fraction<.535?'Lua Cheia':fraction<.715?'Gibosa Minguante':fraction<.785?'Quarto Minguante':'Lua Minguante';
+ $('moon-visual-label').textContent=stage+' · iluminação estimada: '+Math.round(illuminated*100)+'%';
+ disk.setAttribute('aria-label',stage+', iluminação aproximada '+Math.round(illuminated*100)+' por cento');
+ const x= Math.cos(2*Math.PI*fraction);
+ const rx=Math.max(.01,Math.abs(x)*48);const lit='#ead49e',dark='#102b20';const right=waxing;const outer=right?'M 48 0 A 48 48 0 0 1 48 96':'M 48 0 A 48 48 0 0 0 48 96';const sweep=(x>=0)!==right?1:0;const path=outer+' A '+rx+' 48 0 0 '+sweep+' 48 0 Z';disk.innerHTML='<svg viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="48" fill="'+dark+'"/><path d="'+path+'" fill="'+lit+'"/></svg>';
+}
 render();
