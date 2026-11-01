@@ -173,3 +173,15 @@ body:has(#landing-view:not([hidden])){background:#10291c}
 .planning-task span.completed{text-decoration:line-through;opacity:.65}
 #planning-status{color:#31503b;font-size:.95rem}
 @media(max-width:700px){.planning-fields{grid-template-columns:1fr}.planning-fields>div:last-child{grid-column:auto}}
+
+/* Configurações: preferências e proteção dos dados. */
+.settings-page{max-width:1050px}
+.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:25px}
+.settings-panel{padding:23px;border:1px solid #cda45b;border-radius:15px;background:#fff7e3;color:#173822}
+.settings-panel h3{margin:0 0 12px;font-size:1.45rem;color:#173822}
+.settings-panel p{line-height:1.55;margin:9px 0 17px}
+.settings-panel label:not(.diary-restore){display:block;margin:8px 0;font-weight:700}
+#settings-timezone{max-width:100%;padding:11px;border:1px solid #b68c40;border-radius:8px;background:#fff;color:#173822}
+#settings-timezone-status{font-weight:700;color:#28513a}
+@media(max-width:750px){.settings-grid{grid-template-columns:1fr}.settings-panel{padding:18px}}
+@media print{.settings-page .diary-actions{display:none!important}}
