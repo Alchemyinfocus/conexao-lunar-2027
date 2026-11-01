@@ -16,6 +16,7 @@ function openFeature(name){
  if(name==='ingresses'&&window.renderIngressesPage)window.renderIngressesPage();
  if(name==='diary'&&window.renderDiaryPage)window.renderDiaryPage();
  if(name==='planning'&&window.renderPlanningPage)window.renderPlanningPage();
+ if(name==='settings'&&window.renderSettingsPage)window.renderSettingsPage();
  title.textContent=labels[name];
  for(const section of sections.querySelectorAll('.feature-content'))section.hidden=section.id!==targets[name];
  window.scrollTo(0,0);
