@@ -69,3 +69,12 @@ body{background:radial-gradient(circle at 50% 0%,#3c5130 0%,#0a2315 60%,#07180e 
 @media(max-width:1100px){.dashboard{grid-template-columns:220px minmax(0,1fr)}.feature-tiles{grid-template-columns:repeat(3,1fr)}.hero{padding-left:5%}}
 @media(max-width:650px){.hero{text-align:center;padding:25px 12px}.hero .tagline{margin-left:0}.dashboard{display:flex;flex-direction:column}.feature-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.feature-tile{min-height:125px}.sidebar .moon-art{display:block}}
 @media print{.feature-tiles,.feature-content{display:none!important}}
+
+/* Navegação: landing como tela inicial; recursos sob demanda. */
+#landing-view[hidden],#resource-view[hidden],#resource-sections[hidden],.feature-content[hidden]{display:none!important}
+#landing-view .feature-tiles{margin-top:22px;margin-bottom:35px}
+.resource-nav{display:flex;align-items:center;gap:20px;padding:14px 3%;border-bottom:1px solid #d7ac54;background:#102c20;color:#f7e5bd}
+#return-home{padding:11px 17px;background:#d7ac54;border:1px solid #f7e5bd;border-radius:8px;color:#102c20;font-weight:bold}
+#resource-title{font-size:1.3rem}
+#resource-view .feature-content{margin:16px 3%}
+@media(max-width:650px){.resource-nav{flex-wrap:wrap}.resource-nav #resource-title{font-size:1.05rem}}
