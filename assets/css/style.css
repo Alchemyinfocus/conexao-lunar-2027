@@ -48,3 +48,24 @@
 .topbar .brandmark img{display:block!important;width:100%!important;height:100%!important;max-width:48px!important;max-height:48px!important;object-fit:contain;object-position:center}
 .topbar .brandmark img[hidden]{display:none!important}
 @media(max-width:650px){.topbar .brandmark{flex-basis:42px;width:42px;height:42px;min-width:42px;min-height:42px}.topbar .brandmark img{max-width:42px!important;max-height:42px!important}}
+
+/* Landing page funcional baseada na composição editorial aprovada. */
+body{background:radial-gradient(circle at 50% 0%,#3c5130 0%,#0a2315 60%,#07180e 100%)}
+.site{max-width:1600px}
+.topbar{background:linear-gradient(90deg,#091d13,#132b1a,#091d13);min-height:75px}
+.hero{min-height:225px;text-align:left;padding:26px 5% 25px 10%;background:radial-gradient(circle at 70% 50%,#b9a27042,transparent 35%),linear-gradient(90deg,#102918,#23412c,#142b1b)}
+.hero h1{font-size:clamp(3rem,5vw,5.3rem)}.hero .strapline{color:#e7bc63}.hero .tagline{margin-left:5%;max-width:620px}.hero .flourish,.hero .ornament{max-width:620px;text-align:center}
+.dashboard{grid-template-columns:minmax(230px,1.3fr) minmax(420px,2.45fr) minmax(280px,1.5fr);gap:12px;padding:12px 2.5%}
+.sidebar{background:radial-gradient(circle at 50% 30%,#2d5130,#0e2819 75%);border-radius:22px}
+.sidebar h2{font-size:clamp(1.2rem,2vw,1.7rem);letter-spacing:.06em}.sidebar-intro{color:#ebd8a7;font-style:italic;font-size:1rem}.sidebar .moon-art{height:115px}
+.months{margin-top:14px;background:#f4dfb6}.months button{padding:4px}
+.details{background:linear-gradient(135deg,#fff0cd,#f1d29c);border-radius:22px}.details h3{font-size:1.25rem;letter-spacing:.04em}
+.feature-tiles{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:8px 2.5% 18px}
+.feature-tile{min-height:135px;padding:15px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;text-decoration:none;color:#f5e3b7;background:linear-gradient(145deg,#28472b,#0b2618);border:2px solid #d7ac54;border-radius:22px;box-shadow:0 5px 12px #0005}
+.feature-tile:hover,.feature-tile:focus-visible{background:#31563a;outline:2px solid #f3d38d;outline-offset:2px}
+.tile-icon{font-size:2.2rem;line-height:1;color:#eac66f}.feature-tile strong{font-size:clamp(.95rem,1.35vw,1.3rem);font-weight:400}.feature-tile small{font-size:.85rem;color:#e8cf99}
+.feature-content{margin:16px 2.5%;padding:20px 25px;border:1px solid #b68c40;border-radius:14px;background:#f7e5bd;color:#19321f;scroll-margin-top:20px}
+.feature-content h2{margin:0 0 8px}.feature-content p{margin:5px 0 15px}.feature-action{padding:10px 16px;border:1px solid #d4ac5a;border-radius:8px;background:#173d2b;color:#f7e5bd}
+@media(max-width:1100px){.dashboard{grid-template-columns:220px minmax(0,1fr)}.feature-tiles{grid-template-columns:repeat(3,1fr)}.hero{padding-left:5%}}
+@media(max-width:650px){.hero{text-align:center;padding:25px 12px}.hero .tagline{margin-left:0}.dashboard{display:flex;flex-direction:column}.feature-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.feature-tile{min-height:125px}.sidebar .moon-art{display:block}}
+@media print{.feature-tiles,.feature-content{display:none!important}}
