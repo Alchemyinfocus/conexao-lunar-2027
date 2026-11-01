@@ -70,6 +70,7 @@ function updateMoonVisual(){
    Calculado com PySwissEph 2.10.03, modo Moshier (FLG_MOSEPH),
    pesquisa de cruzamentos por bisseção. Horários UTC arredondados ao minuto.
    Pendente confronto independente antes de lançamento comercial. */
+const ingressSymbols=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
 const ingressSigns=['Áries','Touro','Gêmeos','Câncer','Leão','Virgem','Libra','Escorpião','Sagitário','Capricórnio','Aquário','Peixes'];
 const ingressRows=[
 ['2027-01-01T10:15',7],['2027-01-03T20:57',8],['2027-01-06T09:17',9],['2027-01-08T22:10',10],
@@ -80,8 +81,12 @@ const ingressRows=[
 const ingressEvents=ingressRows.map(([utc,sign])=>({date:new Date(utc+'Z'),sign}));
 function renderIngress(){
  const el=$('ingress-info');if(!el)return;el.replaceChildren();
- if(state.month!==0){el.textContent='Ingressos deste mês ainda não publicados. Janeiro disponível como prévia técnica.';return}
+ if(state.month!==0){$('zodiac-symbol').textContent='✧';$('zodiac-name').textContent='Posição não disponível';$('zodiac-status').textContent='Dados ainda não verificados';el.textContent='Ingressos deste mês ainda não publicados. Janeiro disponível como prévia técnica.';return}
  const day=selectedKey(),matches=ingressEvents.filter(e=>localParts(e.date).key===day);
+ const latest=[...ingressEvents].reverse().find(e=>localParts(e.date).key<=day);
+ $('zodiac-symbol').textContent=latest?ingressSymbols[latest.sign]:'✧';
+ $('zodiac-name').textContent=latest?'Lua em '+ingressSigns[latest.sign]:'Posição não disponível';
+ $('zodiac-status').textContent=latest?'Prévia técnica · verificar antes da venda':'Aguardando efemérides verificadas';
  const title=document.createElement('p');title.textContent='Ingressos lunares — prévia técnica (zodíaco tropical):';el.append(title);
  if(matches.length){for(const event of matches){const p=document.createElement('p');p.textContent='Lua entra em '+ingressSigns[event.sign]+' às '+localParts(event.date).time+' ('+$('timezone').selectedOptions[0].text+')';el.append(p)}}else{const p=document.createElement('p');p.textContent='Nenhum ingresso registrado nesta data.';el.append(p)}
  const disclaimer=document.createElement('small');disclaimer.textContent='Cálculo preliminar: confirmar em fonte independente antes da venda.';el.append(disclaimer);
