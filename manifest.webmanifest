@@ -1,0 +1,17 @@
+{
+  "name": "Conexão Lunar 2027 — Alchemy in Focus",
+  "short_name": "Conexão Lunar",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#102c20",
+  "theme_color": "#102c20",
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
