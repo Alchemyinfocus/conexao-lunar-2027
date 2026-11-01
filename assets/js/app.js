@@ -65,7 +65,7 @@ function updateMoonVisual(){
  const x= Math.cos(2*Math.PI*fraction);
  const rx=Math.max(.01,Math.abs(x)*48);const lit='#ead49e',dark='#102b20';const right=waxing;const outer=right?'M 48 0 A 48 48 0 0 1 48 96':'M 48 0 A 48 48 0 0 0 48 96';const sweep=(x>=0)!==right?1:0;const path=outer+' A '+rx+' 48 0 0 '+sweep+' 48 0 Z';disk.innerHTML='<svg viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="48" fill="'+dark+'"/><path d="'+path+'" fill="'+lit+'"/></svg>';
 }
-/* PRÉVIA TÉCNICA — janeiro de 2027.
+/* PRÉVIA TÉCNICA — janeiro a março de 2027.
    Lua geocêntrica, zodíaco tropical, fronteiras de 30 graus.
    Calculado com PySwissEph 2.10.03, modo Moshier (FLG_MOSEPH),
    pesquisa de cruzamentos por bisseção. Horários UTC arredondados ao minuto.
@@ -76,12 +76,14 @@ const ingressRows=[
 ['2027-01-01T10:15',7],['2027-01-03T20:57',8],['2027-01-06T09:17',9],['2027-01-08T22:10',10],
 ['2027-01-11T10:35',11],['2027-01-13T21:13',0],['2027-01-16T04:43',1],['2027-01-18T08:32',2],
 ['2027-01-20T09:21',3],['2027-01-22T08:45',4],['2027-01-24T08:44',5],['2027-01-26T11:12',6],
-['2027-01-28T17:21',7],['2027-01-31T03:13',8]
+['2027-01-28T17:21',7],['2027-01-31T03:13',8],
+['2027-02-02T15:32',9],['2027-02-05T04:28',10],['2027-02-07T16:31',11],['2027-02-10T02:48',0],['2027-02-12T10:44',1],['2027-02-14T15:58',2],['2027-02-16T18:38',3],['2027-02-18T19:31',4],['2027-02-20T19:59',5],['2027-02-22T21:44',6],['2027-02-25T02:24',7],['2027-02-27T10:52',8],
+['2027-03-01T22:35',9],['2027-03-04T11:31',10],['2027-03-06T23:25',11],['2027-03-09T09:02',0],['2027-03-11T16:16',1],['2027-03-13T21:30',2],['2027-03-16T01:10',3],['2027-03-18T03:40',4],['2027-03-20T05:36',5],['2027-03-22T08:01',6],['2027-03-24T12:18',7],['2027-03-26T19:43',8],['2027-03-29T06:33',9],['2027-03-31T19:19',10]
 ];
 const ingressEvents=ingressRows.map(([utc,sign])=>({date:new Date(utc+'Z'),sign}));
 function renderIngress(){
  const el=$('ingress-info');if(!el)return;el.replaceChildren();
- if(state.month!==0){$('zodiac-symbol').textContent='✧';$('zodiac-name').textContent='Posição não disponível';$('zodiac-status').textContent='Dados ainda não verificados';el.textContent='Ingressos deste mês ainda não publicados. Janeiro disponível como prévia técnica.';return}
+ if(state.month>2){$('zodiac-symbol').textContent='✧';$('zodiac-name').textContent='Posição não disponível';$('zodiac-status').textContent='Dados ainda não verificados';el.textContent='Ingressos deste mês ainda não publicados. Janeiro a março disponíveis como prévia técnica.';return}
  const day=selectedKey(),matches=ingressEvents.filter(e=>localParts(e.date).key===day);
  const latest=[...ingressEvents].reverse().find(e=>localParts(e.date).key<=day);
  $('zodiac-symbol').textContent=latest?ingressSymbols[latest.sign]:'✧';
