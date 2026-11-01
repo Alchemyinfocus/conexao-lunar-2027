@@ -70,7 +70,7 @@ function updateMoonVisual(){
    Calculado com PySwissEph 2.10.03, modo Moshier (FLG_MOSEPH),
    pesquisa de cruzamentos por bisseção. Horários UTC arredondados ao minuto.
    Pendente confronto independente antes de lançamento comercial. */
-const ingressSymbols=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+const ingressSymbols=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];
 const ingressSigns=['Áries','Touro','Gêmeos','Câncer','Leão','Virgem','Libra','Escorpião','Sagitário','Capricórnio','Aquário','Peixes'];
 const ingressRows=[
 ['2027-01-01T10:15',7],['2027-01-03T20:57',8],['2027-01-06T09:17',9],['2027-01-08T22:10',10],
