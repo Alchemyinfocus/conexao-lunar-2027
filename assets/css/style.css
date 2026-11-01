@@ -137,3 +137,19 @@ body:has(#landing-view:not([hidden])){background:#10291c}
 .ingress-card h3{margin:0 0 8px;font-size:1.25rem;color:#f8e6bc}
 .ingress-card p{margin:0;color:#e6d4aa;font-size:1rem}
 @media(max-width:700px){.ingresses-list{grid-template-columns:1fr}.ingress-card{padding:15px}.ingress-card-symbol{flex-basis:52px;width:52px;height:52px;font-size:2.3rem}}
+
+/* Diário Lunar — página editorial com editor acessível. */
+.lunar-diary-page{max-width:950px}
+.diary-controls{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:25px 0;color:#173822}
+.diary-controls label,.diary-editor-label{font-weight:700;font-size:1.1rem;color:#173822}
+.diary-controls input{min-height:45px;padding:9px 13px;background:#fff8e8;color:#173822;border:1px solid #b68c40;border-radius:8px}
+#diary-day-label{font-style:italic;color:#47634b}
+.diary-editor-label{display:block;margin-bottom:10px}
+#diary-entry{display:block;width:100%;min-height:310px;padding:20px;resize:vertical;background:#fff9e9;color:#173822;border:2px solid #cda45b;border-radius:14px;font:1.15rem/1.65 Georgia,serif}
+#diary-entry:focus{outline:2px solid #1b5739;outline-offset:3px}
+.diary-save-status{margin:10px 0 20px!important;color:#31503b;font-size:.95rem}
+.diary-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.diary-actions button,.diary-restore{display:inline-block;padding:12px 17px;background:#153823;color:#f8e6bc;border:1px solid #cfa85d;border-radius:8px;cursor:pointer;font-weight:700}
+.diary-restore input{position:absolute;width:1px;height:1px;opacity:0}
+.diary-actions button:hover,.diary-restore:hover{background:#28513a}
+@media print{#resource-view .lunar-diary-page{display:block!important;box-shadow:none!important;border:0!important}#resource-view .diary-actions,#resource-view .diary-save-status{display:none!important}#diary-entry{min-height:500px;border:1px solid #999}}
