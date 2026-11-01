@@ -21,7 +21,8 @@ editor.addEventListener('input',()=>{
  if(!validDate(date.value))return;
  try{
   localStorage.setItem(noteKey(),editor.value);
-  status.textContent='Nota salva neste navegador.';
+  window.lunarMarkUnsaved?.();
+  status.textContent='Nota salva neste navegador; exporte um backup para protegê-la.';
   if(key()===noteKey()){calendarNote.value=editor.value;calendarStatus.textContent='Nota salva neste navegador.'}
  }catch(e){status.textContent='Falha ao salvar. Exporte ou copie o texto antes de sair.'}
 });
