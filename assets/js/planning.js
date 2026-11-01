@@ -17,7 +17,7 @@ function load(){
  fields.forEach(n=>inputs[n].value=data[n]);renderTasks();
 }
 function save(){
- try{localStorage.setItem(key(),JSON.stringify(data));status.textContent='Planejamento salvo neste navegador.'}
+ try{localStorage.setItem(key(),JSON.stringify(data));window.lunarMarkUnsaved?.();status.textContent='Planejamento salvo neste navegador; exporte um backup para protegê-lo.'}
  catch(e){status.textContent='Falha ao salvar. Faça backup ou copie os textos.'}
 }
 function renderTasks(){
