@@ -14,6 +14,7 @@ function openFeature(name){
  dashboard.hidden=name!=='calendar';toolbar.hidden=name!=='calendar';
  if(name==='phases'&&window.renderPhasesPage)window.renderPhasesPage();
  if(name==='ingresses'&&window.renderIngressesPage)window.renderIngressesPage();
+ if(name==='diary'&&window.renderDiaryPage)window.renderDiaryPage();
  title.textContent=labels[name];
  for(const section of sections.querySelectorAll('.feature-content'))section.hidden=section.id!==targets[name];
  window.scrollTo(0,0);
