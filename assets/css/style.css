@@ -153,3 +153,23 @@ body:has(#landing-view:not([hidden])){background:#10291c}
 .diary-restore input{position:absolute;width:1px;height:1px;opacity:0}
 .diary-actions button:hover,.diary-restore:hover{background:#28513a}
 @media print{#resource-view .lunar-diary-page{display:block!important;box-shadow:none!important;border:0!important}#resource-view .diary-actions,#resource-view .diary-save-status{display:none!important}#diary-entry{min-height:500px;border:1px solid #999}}
+
+/* Planejamento Lunar — editor mensal e checklist. */
+.planning-page{max-width:1000px}
+#planning-progress{color:#245238;font-weight:700}
+.planning-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:20px 0}
+.planning-fields>div:last-child{grid-column:1/-1}
+.planning-fields label{display:block;margin-bottom:8px;font-size:1.1rem;font-weight:700;color:#173822}
+.planning-fields textarea{width:100%;padding:16px;min-height:140px;resize:vertical;background:#fff9e9;border:2px solid #cda45b;border-radius:12px;color:#173822;font:1.05rem/1.55 Georgia,serif}
+.planning-tasks{margin:25px 0;padding:22px;border:1px solid #cda45b;border-radius:14px;background:#fff6df}
+.planning-tasks h3{margin:0 0 15px;color:#173822}
+#planning-add-form{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#planning-new-task{flex:1;min-width:170px;padding:12px;background:#fff;border:1px solid #cda45b;border-radius:8px}
+#planning-add-form button,.planning-task button{padding:10px 14px;border:1px solid #b68c40;border-radius:8px;background:#173822;color:#fff2d5;cursor:pointer}
+#planning-task-list{list-style:none;margin:18px 0 0;padding:0}
+.planning-task{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #e0c999}
+.planning-task input{width:20px;height:20px;accent-color:#173822}
+.planning-task span{flex:1;overflow-wrap:anywhere}
+.planning-task span.completed{text-decoration:line-through;opacity:.65}
+#planning-status{color:#31503b;font-size:.95rem}
+@media(max-width:700px){.planning-fields{grid-template-columns:1fr}.planning-fields>div:last-child{grid-column:auto}}
