@@ -4,7 +4,7 @@ const weekdays=['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-
 const state={year:2027,month:0,day:1};
 const $=id=>document.getElementById(id);
 function key(){return 'alchemy-lunar-2027:nota:'+String(state.month+1).padStart(2,'0')+'-'+String(state.day).padStart(2,'0')}
-function storeNote(){try{localStorage.setItem(key(),$('note').value);$('save-status').textContent='Nota salva neste navegador.'}catch(e){$('save-status').textContent='Armazenamento indisponível. Copie sua nota para não perdê-la.'}}
+function storeNote(){try{localStorage.setItem(key(),$('note').value);window.lunarMarkUnsaved?.();$('save-status').textContent='Nota salva neste navegador; exporte um backup para protegê-la.'}catch(e){$('save-status').textContent='Armazenamento indisponível. Copie sua nota para não perdê-la.'}}
 function loadNote(){try{$('note').value=localStorage.getItem(key())||''}catch(e){$('note').value='';$('save-status').textContent='Armazenamento local indisponível neste navegador.'}}
 function render(){const first=new Date(2027,state.month,1).getDay(),days=new Date(2027,state.month+1,0).getDate();$('month-title').textContent=months[state.month]+' 2027';$('date-heading').textContent=state.day+' de '+months[state.month]+' de 2027';$('months').innerHTML='';months.forEach((name,i)=>{const b=document.createElement('button');b.textContent=name;b.setAttribute('aria-current',String(i===state.month));b.onclick=()=>{state.month=i;state.day=1;render()};$('months').append(b)});const grid=$('calendar-grid');grid.innerHTML='';for(let i=0;i<first;i++){const e=document.createElement('span');e.className='empty';grid.append(e)}for(let d=1;d<=days;d++){const b=document.createElement('button');b.className='day';b.textContent=d;b.setAttribute('role','gridcell');b.setAttribute('aria-label',d+' de '+months[state.month]+' de 2027');b.setAttribute('aria-selected',String(d===state.day));b.onclick=()=>{state.day=d;render()};grid.append(b)}const cells=first+days;for(let i=cells;i<Math.ceil(cells/7)*7;i++){const e=document.createElement('span');e.className='empty';grid.append(e)}loadNote();renderPhase();renderIngress()}
 function changeMonth(delta){state.month=(state.month+delta+12)%12;state.day=1;render()}
@@ -18,7 +18,7 @@ $('backup').onclick=()=>{
  catch(e){alert('Não foi possível preparar o backup completo.');return}
  const data=JSON.stringify({format:'alchemy-lunar-2027-backup-v2',notes,planning},null,2);
  const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);
- const a=document.createElement('a');a.href=url;a.download='conexao-lunar-2027-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ const a=document.createElement('a');a.href=url;a.download='conexao-lunar-2027-backup.json';a.click();window.lunarMarkBackup?.();setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 $('restore').onchange=async e=>{
  const file=e.target.files&&e.target.files[0];if(!file)return;
@@ -35,7 +35,7 @@ $('restore').onchange=async e=>{
   if(!confirm('Restaurar '+notes.length+' notas e '+plans.length+' meses de planejamento? Registros existentes nas mesmas datas e meses serão substituídos.'))return;
   for(const [k,v] of notes)localStorage.setItem(k,v);
   for(const [k,v] of plans)localStorage.setItem(k,JSON.stringify(v));
-  loadNote();window.dispatchEvent(new Event('alchemy-lunar-backup-restored'));alert('Backup restaurado com sucesso.');
+  window.lunarMarkUnsaved?.();loadNote();window.dispatchEvent(new Event('alchemy-lunar-backup-restored'));alert('Backup restaurado com sucesso.');
  }catch(err){alert('Falha na restauração: '+err.message)}finally{e.target.value=''}
 };
 
