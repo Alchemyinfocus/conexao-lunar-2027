@@ -95,3 +95,18 @@ body:has(#landing-view:not([hidden])){background:#10291c}
 .site:has(#landing-view:not([hidden])){max-width:none;width:100%;margin:0}
 #landing-view.approved-landing{width:100%;max-width:none;margin:0}
 #landing-view .approved-landing-image{width:100%;height:auto;display:block}
+
+/* Landing: caber inteira na janela em desktop, preservando 3:2 e hotspots. */
+@media(min-width:701px){
+  .site:has(#landing-view:not([hidden])){width:100%;max-width:none}
+  #landing-view.approved-landing{
+    width:min(100vw, 150vh);
+    max-width:100%;
+    margin:0 auto;
+  }
+  #landing-view .approved-landing-image{width:100%;height:auto;display:block}
+}
+@media(max-width:700px){
+  #landing-view.approved-landing{width:100%;max-width:none;margin:0 auto}
+  #landing-view .approved-landing-image{width:100%;height:auto}
+}
