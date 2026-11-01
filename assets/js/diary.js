@@ -37,5 +37,6 @@ restore.addEventListener('change',()=>{
 document.getElementById('diary-print').addEventListener('click',()=>window.print());
 window.renderDiaryPage=()=>{const selected='2027-'+String(state.month+1).padStart(2,'0')+'-'+String(state.day).padStart(2,'0');date.value=selected;loadDiary()};
 window.addEventListener('storage',e=>{if(e.key===noteKey())loadDiary()});
+window.addEventListener('alchemy-lunar-backup-restored',loadDiary);
 loadDiary();
 })();
