@@ -185,3 +185,5 @@ body:has(#landing-view:not([hidden])){background:#10291c}
 #settings-timezone-status{font-weight:700;color:#28513a}
 @media(max-width:750px){.settings-grid{grid-template-columns:1fr}.settings-panel{padding:18px}}
 @media print{.settings-page .diary-actions{display:none!important}}
+
+.settings-install-info{margin:18px 0;padding:20px 24px;border:1px solid #cda45b;border-radius:14px;background:#fff7e3;color:#173822}.settings-install-info h3{margin:0 0 12px}.settings-install-info p{line-height:1.6;margin:10px 0}
