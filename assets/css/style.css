@@ -37,3 +37,7 @@
 #zodiac-name{display:block;font-size:1.12rem;margin:5px 0;color:#fff0c9}
 #zodiac-status{display:block;font-size:.74rem;color:#ddc796}
 @media(max-width:500px){.zodiac-emblem{width:64px;height:64px}#zodiac-symbol{font-size:2.5rem}.zodiac-card{gap:10px;padding:9px}}
+
+/* Evita emojis coloridos (frequentemente roxos) em símbolos zodiacais. */
+#zodiac-symbol{font-family:'DejaVu Sans','Segoe UI Symbol','Noto Sans Symbols 2','Arial Unicode MS',sans-serif!important;font-variant-emoji:text;color:#e8cb85!important;-webkit-text-fill-color:#e8cb85;font-weight:400}
+.zodiac-emblem{background:#173b2a!important;border-color:#d6b772!important}
