@@ -41,3 +41,10 @@
 /* Evita emojis coloridos (frequentemente roxos) em símbolos zodiacais. */
 #zodiac-symbol{font-family:'DejaVu Sans','Segoe UI Symbol','Noto Sans Symbols 2','Arial Unicode MS',sans-serif!important;font-variant-emoji:text;color:#e8cb85!important;-webkit-text-fill-color:#e8cb85;font-weight:400}
 .zodiac-emblem{background:#173b2a!important;border-color:#d6b772!important}
+
+/* Correção da marca original: nunca exceder o cabeçalho. */
+.topbar .brand{display:flex;align-items:center;min-width:0;gap:.65rem}
+.topbar .brandmark{display:flex;align-items:center;justify-content:center;flex:0 0 48px;width:48px;height:48px;min-width:48px;min-height:48px;overflow:hidden;border-radius:50%;padding:0;line-height:1}
+.topbar .brandmark img{display:block!important;width:100%!important;height:100%!important;max-width:48px!important;max-height:48px!important;object-fit:contain;object-position:center}
+.topbar .brandmark img[hidden]{display:none!important}
+@media(max-width:650px){.topbar .brandmark{flex-basis:42px;width:42px;height:42px;min-width:42px;min-height:42px}.topbar .brandmark img{max-width:42px!important;max-height:42px!important}}
