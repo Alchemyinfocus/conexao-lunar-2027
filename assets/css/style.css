@@ -110,3 +110,21 @@ body:has(#landing-view:not([hidden])){background:#10291c}
   #landing-view.approved-landing{width:100%;max-width:none;margin:0 auto}
   #landing-view .approved-landing-image{width:100%;height:auto}
 }
+
+/* Página dedicada de fases lunares. */
+#resource-view .dashboard[hidden],#resource-view .toolbar[hidden]{display:none!important}
+.lunar-phases-page{max-width:1100px;margin:28px auto!important;padding:clamp(20px,4vw,48px)!important;background:linear-gradient(140deg,#fff2d5,#ecd09a)!important;border:2px solid #d4a64b!important;box-shadow:0 14px 40px #0005}
+.phases-heading{text-align:center;padding-bottom:24px;border-bottom:1px solid #cda45b}
+.phases-heading h2{font-size:clamp(2rem,4vw,3.4rem);color:#173822}
+.phases-heading p{font-size:1.1rem;max-width:700px;margin:12px auto 0}
+.phases-ornament{color:#ad7827;font-size:1.7rem;letter-spacing:.4em}
+.phases-controls{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;margin:25px 0}
+.phases-controls label{font-weight:700;color:#173822}
+.phases-controls select{padding:10px 14px;min-height:43px;background:#fff7e5;color:#173822;border:1px solid #b68c40;border-radius:8px}
+.phases-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.phase-card{display:flex;align-items:center;gap:18px;padding:25px;background:linear-gradient(130deg,#153823,#28513a);color:#f8e6bc;border:2px solid #cfa85d;border-radius:17px;min-height:130px}
+.phase-card-icon{display:grid;place-items:center;flex:0 0 65px;width:65px;height:65px;border-radius:50%;font-size:3.2rem;color:#edcb7e;background:#0b2417}
+.phase-card h3{margin:0 0 9px;font-size:1.4rem;color:#f8e6bc}
+.phase-card p{margin:0;color:#e6d4aa;font-size:1.05rem}
+.phases-source{font-size:.85rem;margin-top:28px!important;color:#5c513a}
+@media(max-width:700px){.phases-list{grid-template-columns:1fr}.phase-card{padding:17px}.phase-card-icon{flex-basis:55px;width:55px;height:55px;font-size:2.5rem}.lunar-phases-page{margin:12px!important}}
