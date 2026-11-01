@@ -89,3 +89,9 @@ body{background:radial-gradient(circle at 50% 0%,#3c5130 0%,#0a2315 60%,#07180e 
 .landing-missing{line-height:1.6;padding:40px 25px;text-align:center;color:#f7e5bd}
 @media(max-width:700px){.approved-landing{min-width:0}.landing-hotspots a{border-radius:5px}}
 @media print{.approved-landing{display:none!important}}
+
+/* Landing aprovada em largura total, sem margens laterais do contêiner. */
+body:has(#landing-view:not([hidden])){background:#10291c}
+.site:has(#landing-view:not([hidden])){max-width:none;width:100%;margin:0}
+#landing-view.approved-landing{width:100%;max-width:none;margin:0}
+#landing-view .approved-landing-image{width:100%;height:auto;display:block}
