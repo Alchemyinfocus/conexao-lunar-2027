@@ -203,7 +203,6 @@ body:has(#landing-view:not([hidden])){background:#10291c}
 #landing-panel-body button:hover{background:#315f43}
 #landing-panel-body p{font-size:.92rem}
 
-
 /* Correção responsiva inicial — landing page baseada em arte aprovada */
 html,
 body {
@@ -223,7 +222,6 @@ body {
   height: auto;
 }
 
-/* O painel não pode ultrapassar a tela nem esconder o botão de fechar. */
 #landing-view .landing-top-panel {
   box-sizing: border-box;
   width: min(420px, calc(100vw - 32px));
@@ -242,7 +240,6 @@ body {
   overflow-wrap: anywhere;
 }
 
-/* Melhora a resposta ao toque sem mudar a posição visual dos hotspots. */
 #landing-view .landing-top-hotspots a,
 #landing-view .landing-top-hotspots button,
 #landing-view .landing-hotspots a {
@@ -279,7 +276,6 @@ body {
     line-height: 1;
   }
 
-  /* Áreas de toque maiores, sem aumentar a imagem nem criar rolagem lateral. */
   #landing-view .landing-top-hotspots a,
   #landing-view .landing-top-hotspots button {
     min-height: 28px;
@@ -304,4 +300,39 @@ body {
     min-height: 38px;
     padding: 8px 10px;
   }
-}Corrige responsividade inicial da landing page
+}
+
+/* Hotspots dos painéis principais desenhados na landing */
+.landing-main-hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.landing-main-hotspots a {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  height: var(--h);
+  display: block;
+  pointer-events: auto;
+  border-radius: 18px;
+  touch-action: manipulation;
+}
+
+.landing-main-hotspots a:hover {
+  box-shadow: inset 0 0 0 3px #ffe6a0, 0 0 22px #f0cb7288;
+}
+
+.landing-main-hotspots a:focus-visible {
+  outline: 4px solid #fff2a6;
+  outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+  .landing-main-hotspots a {
+    border-radius: 8px;
+  }
+}
