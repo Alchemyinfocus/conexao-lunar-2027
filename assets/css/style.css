@@ -84,7 +84,7 @@ body{background:radial-gradient(circle at 50% 0%,#3c5130 0%,#0a2315 60%,#07180e 
 .approved-landing-image{display:block;width:100%;height:auto;user-select:none}
 .landing-hotspots{position:absolute;inset:0;pointer-events:none}
 .landing-hotspots a{position:absolute;left:var(--x);width:var(--w);top:82%;height:12.5%;display:block;pointer-events:auto;border-radius:16px}
-.landing-hotspots a:hover{box-shadow:inset 0 0 0 3px #ffe6a0,0 0 22px #f0cb7288}
+.landing-hotspots a:hover{box-shadow:none}
 .landing-hotspots a:focus-visible{outline:4px solid #fff2a6;outline-offset:2px}
 .landing-missing{line-height:1.6;padding:40px 25px;text-align:center;color:#f7e5bd}
 @media(max-width:700px){.approved-landing{min-width:0}.landing-hotspots a{border-radius:5px}}
@@ -192,7 +192,7 @@ body:has(#landing-view:not([hidden])){background:#10291c}
 /* Hotspots transparentes na barra superior da arte aprovada. */
 .landing-top-hotspots{position:absolute;inset:0;pointer-events:none;z-index:3}
 .landing-top-hotspots a,.landing-top-hotspots button{position:absolute;top:1.5%;height:5.3%;left:var(--x);width:var(--w);pointer-events:auto;display:block;background:transparent;border:0;padding:0;cursor:pointer;border-radius:4px}
-.landing-top-hotspots a:hover,.landing-top-hotspots button:hover{background:transparent}
+.landing-top-hotspots a:hover,.landing-top-hotspots button:hover{background:transparent;box-shadow:none}
 .landing-top-hotspots a:focus-visible,.landing-top-hotspots button:focus-visible{outline:3px solid #ffe6a0;outline-offset:1px}
 .landing-top-panel{position:absolute;z-index:5;top:7%;right:5%;width:min(420px,90%);padding:24px;background:#102b1e;color:#f7e5bd;border:1px solid #d7ac54;border-radius:12px;line-height:1.5;box-shadow:0 12px 35px #0009}
 .landing-top-panel[hidden]{display:none!important}
@@ -302,37 +302,3 @@ body {
   }
 }
 
-/* Hotspots dos painéis principais desenhados na landing */
-.landing-main-hotspots {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-}
-
-.landing-main-hotspots a {
-  position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: var(--w);
-  height: var(--h);
-  display: block;
-  pointer-events: auto;
-  border-radius: 18px;
-  touch-action: manipulation;
-}
-
-.landing-main-hotspots a:hover {
-  box-shadow: inset 0 0 0 3px #ffe6a0, 0 0 22px #f0cb7288;
-}
-
-.landing-main-hotspots a:focus-visible {
-  outline: 4px solid #fff2a6;
-  outline-offset: 2px;
-}
-
-@media (max-width: 700px) {
-  .landing-main-hotspots a {
-    border-radius: 8px;
-  }
-}
