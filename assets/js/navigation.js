@@ -32,4 +32,5 @@ document.getElementById('return-home').addEventListener('click',home);
 	 e.preventDefault();if(name)openFeature(name);else home();
 	}));
 	if(location.hash){const name=Object.keys(targets).find(k=>'#'+targets[k]===location.hash);if(name)openFeature(name)}
+	else openFeature('calendar');
 })();
