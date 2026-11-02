@@ -26,10 +26,11 @@ function openFeature(name){
 function home(){resource.hidden=true;landing.hidden=false;sections.hidden=true;window.scrollTo(0,0)}
 document.querySelectorAll('[data-feature]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openFeature(a.dataset.feature)}));
 document.getElementById('return-home').addEventListener('click',home);
-document.querySelectorAll('.topbar nav a').forEach(a=>a.addEventListener('click',e=>{
- const hash=a.getAttribute('href');
- const name=Object.keys(targets).find(k=>'#'+targets[k]===hash);
- e.preventDefault();if(name)openFeature(name);else home();
-}));
-if(location.hash){const name=Object.keys(targets).find(k=>'#'+targets[k]===location.hash);if(name)openFeature(name)}
+	document.querySelectorAll('.topbar nav a').forEach(a=>a.addEventListener('click',e=>{
+	 const hash=a.getAttribute('href');
+	 const name=Object.keys(targets).find(k=>'#'+targets[k]===hash);
+	 e.preventDefault();if(name)openFeature(name);else home();
+	}));
+	if(location.hash){const name=Object.keys(targets).find(k=>'#'+targets[k]===location.hash);if(name)openFeature(name)}
+	else openFeature('calendar');
 })();
