@@ -234,7 +234,7 @@ function renderIngress(){
  const transitionToday=matches.length>0;
  $('zodiac-symbol').textContent=transitionToday?'◐':latest?ingressSymbols[latest.sign]:'✧';
  $('zodiac-name').textContent=transitionToday?'Mudança de signo neste dia':latest?'Lua em '+ingressSigns[latest.sign]:'Posição não disponível';
- $('zodiac-status').textContent=transitionToday?'Consulte o horário do ingresso abaixo; o signo varia ao longo do dia':latest?'Prévia técnica · verificar antes da venda':'Aguardando efemérides verificadas';
+ $('zodiac-status').textContent=transitionToday?'Consulte o horário do ingresso abaixo; o signo varia ao longo do dia':latest?'Posição lunar calculada para a data selecionada':'Aguardando efemérides verificadas';
  const title=document.createElement('p');title.textContent='Ingressos lunares — prévia técnica (zodíaco tropical):';el.append(title);
  if(matches.length){for(const event of matches){const p=document.createElement('p');p.textContent='Lua entra em '+ingressSigns[event.sign]+' às '+localParts(event.date).time+' ('+$('timezone').selectedOptions[0].text+')';el.append(p)}}else{const p=document.createElement('p');p.textContent='Nenhum ingresso registrado nesta data.';el.append(p)}
  const disclaimer=document.createElement('small');disclaimer.textContent='Cálculo preliminar: confirmar em fonte independente antes da venda.';el.append(disclaimer);
