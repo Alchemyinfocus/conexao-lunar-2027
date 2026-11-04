@@ -536,3 +536,19 @@ CSS
     display: none !important;
   }
 }
+
+/* Impressão: remover conteúdo da barra superior,
+   preservando a linha dourada */
+@media print {
+  .approved-nav {
+    display: none !important;
+  }
+
+  .rebuild-landing > .approved-nav {
+    display: none !important;
+  }
+
+  .approved-hero {
+    border-top: 1px solid #d7ac54 !important;
+  }
+}
