@@ -328,8 +328,7 @@ body {
 
 /* Elementos separados usados apenas como moldura decorativa; não interceptam cliques. */
 .rebuild-landing .sidebar:after,.rebuild-landing .details:after{content:"";position:absolute;z-index:0;pointer-events:none;background-repeat:no-repeat;background-position:bottom left;background-size:contain;opacity:.2}
-.rebuild-landing .sidebar:after{inset:auto auto 0 0;width:145px;height:170px;background-image:url('../decoracao/flora/flor_esquerda.png')}
-.rebuild-landing .details:after{inset:auto 0 0 auto;width:155px;height:180px;background-image:url('../decoracao/flora/folhas_direita_inferior.png');background-position:bottom right}
+
 .rebuild-landing .sidebar>*,.rebuild-landing .details>*{position:relative;z-index:1}
 @media(max-width:650px){.rebuild-landing .sidebar:after,.rebuild-landing .details:after{opacity:.14;width:115px;height:130px}}
 
