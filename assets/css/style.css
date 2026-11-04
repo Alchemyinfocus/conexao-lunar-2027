@@ -559,3 +559,10 @@ CSS
     display: none !important;
   }
 }
+
+/* Impressão: remover somente a faixa superior */
+@media print {
+  header.rebuild-header {
+    display: none !important;
+  }
+}
