@@ -529,3 +529,10 @@ CSS
     font-size: 18px !important;
   }
 }
+
+/* Impressão: ocultar somente a barra superior da landing */
+@media print {
+  .rebuild-header {
+    display: none !important;
+  }
+}
