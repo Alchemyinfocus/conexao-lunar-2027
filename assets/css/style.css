@@ -502,3 +502,30 @@ CSS
 #resource-view [hidden]{display:none!important}
 #return-home:not([hidden]){display:inline-flex;align-items:center;padding:9px 15px;border:1px solid #d7ac54;border-radius:7px;color:#f7e5bd;background:#173d2b;cursor:pointer;font:inherit}
 #resource-title:not([hidden]){display:inline-block;color:#f7e5bd;font-weight:600}
+
+/* Correcao de impressao - Conexao Lunar 2027 */
+@media print {
+  /* Ocultar os cartoes de navegacao */
+  .rebuild-feature-grid {
+    display: none !important;
+  }
+
+  /* Ocultar controles de navegacao */
+  .approved-nav-actions,
+  #return-home,
+  .resource-nav nav,
+  .toolbar {
+    display: none !important;
+  }
+
+  /* Permitir que o titulo apareca completo */
+  #resource-title {
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    font-size: 18px !important;
+  }
+}
