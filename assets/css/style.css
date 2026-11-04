@@ -566,3 +566,10 @@ CSS
     display: none !important;
   }
 }
+
+/* Impressão: remover somente o cabeçalho superior */
+@media print {
+  header.approved-nav {
+    display: none !important;
+  }
+}
