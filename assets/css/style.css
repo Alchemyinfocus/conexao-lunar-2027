@@ -530,25 +530,25 @@ CSS
   }
 }
 
-/* Impressão: ocultar somente a barra superior da landing */
+
+
+/* Impressão: preservar a arte e ocultar a navegação superior */
 @media print {
+  .rebuild-header .approved-brand,
+  .rebuild-header .approved-nav,
+  .rebuild-header .approved-nav-actions,
+  .rebuild-header .brand-readable,
+  .rebuild-header .rebuild-logo,
+  .rebuild-header nav {
+    display: none !important;
+  }
+
   .rebuild-header {
-    display: none !important;
-  }
-}
-
-/* Impressão: remover conteúdo da barra superior,
-   preservando a linha dourada */
-@media print {
-  .approved-nav {
-    display: none !important;
-  }
-
-  .rebuild-landing > .approved-nav {
-    display: none !important;
+    display: block !important;
+    border-bottom: 1px solid #d7ac54 !important;
   }
 
   .approved-hero {
-    border-top: 1px solid #d7ac54 !important;
+    display: block !important;
   }
 }
