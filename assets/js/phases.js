@@ -14,7 +14,9 @@ function renderPhasesPage(){
  const items=phaseEvents.filter(event=>{const parts=monthFormatter.formatToParts(event.date);return Number(parts.find(p=>p.type==='month').value)===month+1&&Number(parts.find(p=>p.type==='year').value)===2027});
  for(const event of items){
   const card=document.createElement('article');card.className='phase-card';
-  const icon=document.createElement('span');icon.className='phase-card-icon';icon.textContent=symbols[event.type];icon.setAttribute('aria-hidden','true');
+  
+const icon=document.createElement('span');icon.className='phase-card-icon';const img=document.createElement('img');const phaseImages={nova:'fase_nova_dourada.png',crescente:'fase_quarto_crescente_dourada.png',cheia:'fase_cheia_dourada.png',minguante:'fase_quarto_minguante_dourada.png'};img.src='assets/fases-douradas/'+phaseImages[event.type];img.alt='';img.style.cssText='width:44px;height:44px;object-fit:contain;display:block';icon.append(img);icon.setAttribute('aria-hidden','true');
+
   const content=document.createElement('div');const heading=document.createElement('h3');heading.textContent=names[event.type];
   const date=document.createElement('p');date.textContent=formatter.format(event.date);
   content.append(heading,date);card.append(icon,content);list.append(card);
