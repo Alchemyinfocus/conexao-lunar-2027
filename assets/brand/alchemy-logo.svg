@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Alchemy — In Focus</title>
+  <desc id="desc">Símbolo dourado com um A abstrato, arco orbital e estrela, acompanhado de Alchemy In Focus.</desc>
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F6D58A"/>
+      <stop offset="0.48" stop-color="#FFF3C9"/>
+      <stop offset="1" stop-color="#C88C2C"/>
+    </linearGradient>
+    <style>
+      .wordmark { font-family: 'Montserrat', 'Avenir Next', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; letter-spacing: 22px; }
+      .tagline { font-family: 'Montserrat', 'Avenir Next', 'Helvetica Neue', Arial, sans-serif; font-weight: 300; letter-spacing: 26px; }
+    </style>
+  </defs>
+  <g fill="none" stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round">
+    <!-- órbita aberta -->
+    <path d="M 282 676 C 182 485 246 262 440 172 C 642 78 862 136 974 306 C 1005 353 1027 404 1038 457" stroke-width="20"/>
+    <path d="M 1037 493 C 1054 589 1026 684 968 752" stroke-width="20"/>
+    <!-- brilho/estrela -->
+    <path d="M 851 330 C 858 378 868 389 918 397 C 868 405 858 416 851 467 C 844 416 834 405 784 397 C 834 389 844 378 851 330 Z" fill="url(#gold)" stroke="none"/>
+  </g>
+  <!-- A principal -->
+  <path d="M 434 757 L 621 204 L 850 757 L 773 757 L 705 583 L 600 329 L 506 583 L 470 757 Z" fill="url(#gold)"/>
+  <!-- haste/cauda esquerda -->
+  <path d="M 485 520 L 383 757 L 294 757 C 376 725 420 666 459 574 Z" fill="url(#gold)"/>
+  <!-- onda de alquimia -->
+  <path d="M 319 571 C 392 488 470 467 548 502 C 642 544 698 640 801 703 C 842 728 884 744 927 752 C 819 758 737 721 666 665 C 599 612 546 554 474 535 C 417 520 365 540 319 571 Z" fill="url(#gold)"/>
+  <!-- pequeno arco interno -->
+  <path d="M 443 449 C 489 421 542 426 582 461 C 534 437 489 433 443 449 Z" fill="url(#gold)"/>
+  <!-- tipografia -->
+  <g fill="url(#gold)" text-anchor="middle">
+    <text class="wordmark" x="600" y="920" font-size="112">ALCHEMY</text>
+    <text class="tagline" x="600" y="1010" font-size="50">IN FOCUS</text>
+  </g>
+</svg>
