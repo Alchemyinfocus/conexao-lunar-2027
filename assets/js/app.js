@@ -273,7 +273,7 @@ function decorateCalendarDays(){
   if(!phase&&!sign)return;
   const meta=document.createElement('small');meta.className='day-meta';
   if(sign){const item=document.createElement('span');item.textContent=ingressSymbols[sign.sign]+' '+ingressSigns[sign.sign];meta.append(item)}
-  if(phase){const item=document.createElement('span');const icon=document.createElement('img');const phaseFiles={nova:'01_nova.svg',crescente:'03_quarto_crescente.svg',cheia:'05_cheia.svg',minguante:'07_quarto_minguante.svg'};icon.src='assets/icons-approved/'+phaseFiles[phase.type];icon.alt='';icon.setAttribute('aria-hidden','true');item.append(icon,document.createTextNode(phaseNames[phase.type]));meta.append(item)}
+  if(phase){const item=document.createElement('span');const icon=document.createElement('img');const phaseFiles={nova:'01_nova.svg',crescente:'03_quarto_crescente.svg',cheia:'05_cheia.svg',minguante:'07_quarto_minguante.svg'};icon.src='assets/moon-phases/'+phaseFiles[phase.type];icon.alt='';icon.setAttribute('aria-hidden','true');item.append(icon,document.createTextNode(phaseNames[phase.type]));meta.append(item)}
   b.append(meta);
  });
 }
