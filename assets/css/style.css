@@ -544,9 +544,9 @@ CSS
   }
 
   .rebuild-header {
-    display: block !important;
-    border-bottom: 1px solid #d7ac54 !important;
-  }
+  display: none !important;
+  border: none !important;
+}
 
   .approved-hero {
     display: block !important;
