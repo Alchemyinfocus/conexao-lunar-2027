@@ -552,3 +552,10 @@ CSS
     display: block !important;
   }
 }
+
+/* Impressão: ocultar somente a barra superior */
+@media print {
+  .topbar {
+    display: none !important;
+  }
+}
