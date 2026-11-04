@@ -1,36 +1,32 @@
 'use strict';
 (function(){
-const landing=document.getElementById('landing-view');
-const resource=document.getElementById('resource-view');
-const sections=document.getElementById('resource-sections');
-const title=document.getElementById('resource-title');
+const root=document.getElementById('resource-view');
+const hero=document.getElementById('inicio');
 const dashboard=document.getElementById('calendario');
+const sections=document.getElementById('resource-sections');
 const toolbar=document.querySelector('#resource-view > .toolbar');
+const title=document.getElementById('resource-title');
+const back=document.getElementById('return-home');
 const labels={calendar:'Calendário Anual',phases:'Fases da Lua',ingresses:'Ingressos nos Signos',diary:'Diário Lunar',planning:'Planejamento Lunar',settings:'Configurações'};
 const targets={calendar:'calendario',phases:'ciclos',ingresses:'ingressos',diary:'diario',planning:'planejamento',settings:'configuracoes'};
-function openFeature(name){
- if(!labels[name])return;
- landing.hidden=true;resource.hidden=false;sections.hidden=name==='calendar';
- dashboard.hidden=name!=='calendar';toolbar.hidden=name!=='calendar';
- if(name==='phases'&&window.renderPhasesPage)window.renderPhasesPage();
- if(name==='ingresses'&&window.renderIngressesPage)window.renderIngressesPage();
- if(name==='diary'&&window.renderDiaryPage)window.renderDiaryPage();
- if(name==='planning'&&window.renderPlanningPage)window.renderPlanningPage();
- if(name==='settings'&&window.renderSettingsPage)window.renderSettingsPage();
- title.textContent=labels[name];
- for(const section of sections.querySelectorAll('.feature-content'))section.hidden=section.id!==targets[name];
+function show(page,historyChange){
+ if(page!=='home'&&!labels[page])page='home';
+ const home=page==='home';
+ root.dataset.currentPage=page;
+ hero.hidden=!home;
+ dashboard.hidden=!home&&page!=='calendar';
+ if(toolbar)toolbar.hidden=!home&&page!=='calendar';
+ sections.hidden=home||page==='calendar';
+ title.hidden=home;back.hidden=home;
+ if(!home)title.textContent=labels[page];
+ for(const section of sections.querySelectorAll('.feature-content'))section.hidden=section.id!==targets[page];
+ const render={phases:'renderPhasesPage',ingresses:'renderIngressesPage',diary:'renderDiaryPage',planning:'renderPlanningPage',settings:'renderSettingsPage'}[page];
+ if(render&&typeof window[render]==='function')window[render]();
+ if(historyChange)history.pushState({page},'',home?'#inicio':'#'+targets[page]);
  window.scrollTo(0,0);
- if(name==='calendar')document.getElementById('calendario').scrollIntoView({block:'start'});
- else document.getElementById(targets[name]).scrollIntoView({block:'start'});
 }
-function home(){resource.hidden=true;landing.hidden=false;sections.hidden=true;window.scrollTo(0,0)}
-document.querySelectorAll('[data-feature]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openFeature(a.dataset.feature)}));
-document.getElementById('return-home').addEventListener('click',home);
-	document.querySelectorAll('.topbar nav a').forEach(a=>a.addEventListener('click',e=>{
-	 const hash=a.getAttribute('href');
-	 const name=Object.keys(targets).find(k=>'#'+targets[k]===hash);
-	 e.preventDefault();if(name)openFeature(name);else home();
-	}));
-	if(location.hash){const name=Object.keys(targets).find(k=>'#'+targets[k]===location.hash);if(name)openFeature(name)}
-	else openFeature('calendar');
+document.querySelectorAll('[data-feature]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();show(link.dataset.feature,true)}));
+back.addEventListener('click',()=>show('home',true));
+window.addEventListener('popstate',()=>show(Object.keys(targets).find(key=>'#'+targets[key]===location.hash)||'home',false));
+show(Object.keys(targets).find(key=>'#'+targets[key]===location.hash)||'home',false);
 })();
