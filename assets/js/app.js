@@ -125,7 +125,7 @@ function renderPhase(){
   {date:new Date('2027-02-01T06:21:00Z'),icon:'♈',label:window.LunarI18n.getLanguage()==='en'?'Moon in Aries':'Lua em Áries'},
  ]:[
   ...phaseEvents.filter(p=>p.date.getTime()>current).map(p=>({date:p.date,icon:phaseIcons[p.type],label:phaseNames[p.type]})),
-  ...ingressEvents.filter(p=>p.date.getTime()>current).map(p=>({date:p.date,icon:ingressSymbols[p.sign],label:'Lua em '+ingressSigns[p.sign]}))
+  ...ingressEvents.filter(p=>p.date.getTime()>current).map(p=>({date:p.date,icon:ingressSymbols[p.sign],label:window.LunarI18n.getLanguage()==='en'?'Moon in '+ingressSignsEn[p.sign]:'Lua em '+ingressSigns[p.sign]}))
  ].sort((a,b)=>a.date-b.date).slice(0,4);
  const info=$('phase-info');info.replaceChildren();
  upcoming.forEach(event=>{const row=document.createElement('div');row.className='movement-row';const icon=document.createElement('span');icon.className='movement-row-icon';icon.textContent=event.icon;const text=document.createElement('span');text.className='movement-row-text';text.innerHTML='<strong>'+event.label+'</strong><small>'+new Intl.DateTimeFormat('pt-BR',{timeZone:$('timezone').value,day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}).format(event.date)+'</small>';row.append(icon,text);info.append(row)});
