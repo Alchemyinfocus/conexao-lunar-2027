@@ -1,5 +1,7 @@
 'use strict';
-const months=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+const months = window.LunarI18n.translations[window.LunarI18n.getLanguage()].months;
+
 const weekdays=['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
 const state={year:2027,month:0,day:12};
 const $=id=>document.getElementById(id);
