@@ -20,6 +20,9 @@ since: 'Desde',
 until: 'Até',
 selectedDate: 'Data selecionada',
 estimatedIllumination: 'iluminação estimada',
+      
+calendarNote: 'Datas civis verificadas pelo calendário gregoriano. Fases principais: Observatório Naval dos EUA (USNO).',
+
       months: [
         'Janeiro', 'Fevereiro', 'Março', 'Abril',
         'Maio', 'Junho', 'Julho', 'Agosto',
