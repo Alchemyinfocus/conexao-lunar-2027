@@ -573,3 +573,32 @@ CSS
     display: none !important;
   }
 }
+
+/* Botão de instalação — identidade visual aprovada */
+#install-app {
+  background: #173d2b;
+  color: #f7e5bd;
+  border: 1px solid #d7ac54;
+  border-radius: 8px;
+  padding: 13px 22px;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+}
+
+#install-app:not(:disabled):hover {
+  background: #24543b;
+  border-color: #f0cf83;
+}
+
+#install-app:focus-visible {
+  outline: 3px solid #f0cf83;
+  outline-offset: 3px;
+}
+
+#install-app:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
