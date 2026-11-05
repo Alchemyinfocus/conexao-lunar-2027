@@ -21,6 +21,27 @@ let weekdays = window.LunarI18n.translations[
   window.LunarI18n.getLanguage()
 ].weekdays;
 
+function updateCalendarWeekdays() {
+  const container = document.getElementById('calendar-weekdays');
+  if (!container) return;
+
+  const labels = window.LunarI18n.getLanguage() === 'en'
+    ? ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+    : ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+
+  container.querySelectorAll('span').forEach((span, index) => {
+    span.textContent = labels[index];
+  });
+}
+
+document.addEventListener('lunar:languagechange', updateCalendarWeekdays);
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', updateCalendarWeekdays);
+} else {
+  updateCalendarWeekdays();
+}
+
 const state={year:2027,month:0,day:12};
 const $=id=>document.getElementById(id);
 function key(){return 'alchemy-lunar-2027:nota:'+String(state.month+1).padStart(2,'0')+'-'+String(state.day).padStart(2,'0')}
