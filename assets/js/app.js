@@ -160,7 +160,27 @@ function updateMoonVisual(){
   'Lua Cheia':'05_lua_cheia.png','Gibosa Minguante':'06_gibosa_minguante.png','Quarto Minguante':'07_quarto_minguante.png','Lua Minguante':'08_lua_minguante.png'
  }[stage];
  const todayMoon=$('today-moon-image');if(todayMoon){todayMoon.src='assets/moon-phases/'+phaseAsset;todayMoon.alt=stage}
- const todayStage=$('today-moon-stage');if(todayStage){todayStage.textContent=(state.month===0&&state.day>=12&&state.day<=14)?(window.LunarI18n.getLanguage()==='en'?'Waxing Moon in Taurus':'Lua Crescente em Touro'):stage;}
+ const todayStage = $('today-moon-stage');
+
+if (todayStage) {
+  const phaseNamesEn = {
+    'Lua Nova': 'New Moon',
+    'Lua Crescente': 'Waxing Moon',
+    'Quarto Crescente': 'First Quarter',
+    'Gibosa Crescente': 'Waxing Gibbous',
+    'Lua Cheia': 'Full Moon',
+    'Gibosa Minguante': 'Waning Gibbous',
+    'Quarto Minguante': 'Last Quarter',
+    'Lua Minguante': 'Waning Moon'
+  };
+
+  const isEnglish = window.LunarI18n.getLanguage() === 'en';
+
+  todayStage.textContent =
+    state.month === 0 && state.day === 12
+      ? (isEnglish ? 'Waxing Moon in Taurus' : 'Lua Crescente em Touro')
+      : (isEnglish ? (phaseNamesEn[stage] || stage) : stage);
+}
 
  const todayDate=$('today-moon-date');if(todayDate){if(state.month===0&&state.day===12)todayDate.innerHTML='Desde 12 jan, 04h27<br>Até 14 jan, 17h19';else todayDate.innerHTML=(window.LunarI18n.translations[window.LunarI18n.getLanguage()].selectedDate + ': ')+String(state.day).padStart(2,'0')+' '+months[state.month]+' 2027'}
  const todaySign=$('today-moon-sign');if(todaySign){const latest=[...ingressEvents].reverse().find(e=>localParts(e.date).key<=selectedKey());todaySign.textContent=(state.month===0&&state.day>=12&&state.day<=14)?'♉':latest?ingressSymbols[latest.sign]:'✦'}
