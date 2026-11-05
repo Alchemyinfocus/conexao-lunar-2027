@@ -117,7 +117,7 @@ function renderPhase(){
  const today=selectedKey(),matches=phaseEvents.filter(p=>localParts(p.date).key===today);
  const current=Date.parse(today+'T12:00:00Z');
  const upcoming=(state.month===0&&state.day===12)?[
-  {date:new Date('2027-01-26T14:32:00Z'),icon:'☾',label:window.LunarI18n.getLanguage()==='en'?'Moon in Gemini':'Lua em Gêmeos}'
+  {date:new Date('2027-01-26T14:32:00Z'),icon:'☾',label:window.LunarI18n.getLanguage()==='en'?'Moon in Gemini':'Lua em Gêmeos'},
   {date:new Date('2027-01-22T08:17:00Z'),icon:'○',label:phaseNames.cheia},
   {date:new Date('2027-01-29T21:49:00Z'),icon:'◑',label:phaseNames.minguante},
   {date:new Date('2027-02-01T06:21:00Z'),icon:'♈',label:window.LunarI18n.getLanguage()==='en'?'Moon in Aries':'Lua em Áries'},
