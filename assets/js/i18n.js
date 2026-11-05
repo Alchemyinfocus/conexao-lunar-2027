@@ -118,6 +118,27 @@
     enButton.setAttribute('aria-pressed', String(currentLanguage === 'en'));
   }
 
+  function updateNavigationLanguage() {
+    const labels = {
+      home: 'home',
+      calendar: 'calendar',
+      phases: 'cycles',
+      diary: 'diary',
+      planning: 'planning'
+    };
+
+    document.querySelectorAll('.approved-nav nav a[data-feature]').forEach(link => {
+      const key = labels[link.dataset.feature];
+
+      if (key) {
+        link.textContent = translate(key);
+      }
+    });
+  }
+
+  document.addEventListener('lunar:languagechange', updateNavigationLanguage);
+  document.addEventListener('DOMContentLoaded', updateNavigationLanguage);
+
   function initializeLanguageButtons() {
     const ptButton = document.getElementById('lang-pt');
     const enButton = document.getElementById('lang-en');
