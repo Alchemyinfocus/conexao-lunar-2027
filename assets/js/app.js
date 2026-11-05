@@ -175,6 +175,7 @@ function updateMoonVisual(){
    Pendente confronto independente antes de lançamento comercial. */
 const ingressSymbols=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];
 const ingressSigns=['Áries','Touro','Gêmeos','Câncer','Leão','Virgem','Libra','Escorpião','Sagitário','Capricórnio','Aquário','Peixes'];
+const ingressSignsEn = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
 const ingressRows=[
 ['2027-01-01T10:15',7],['2027-01-03T20:57',8],['2027-01-06T09:17',9],['2027-01-08T22:10',10],
 ['2027-01-11T10:35',11],['2027-01-13T21:13',0],['2027-01-16T04:43',1],['2027-01-18T08:32',2],
