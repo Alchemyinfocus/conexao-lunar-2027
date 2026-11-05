@@ -161,6 +161,7 @@ function updateMoonVisual(){
   'Lua Cheia':'05_lua_cheia.png','Gibosa Minguante':'06_gibosa_minguante.png','Quarto Minguante':'07_quarto_minguante.png','Lua Minguante':'08_lua_minguante.png'
  }[stage];
  const todayMoon=$('today-moon-image');if(todayMoon){todayMoon.src='assets/moon-phases/'+phaseAsset;todayMoon.alt=stage}
+  const isEnglish = window.LunarI18n.getLanguage() === 'en';
  const todayStage = $('today-moon-stage');
 
 if (todayStage) {
@@ -175,7 +176,7 @@ if (todayStage) {
     'Lua Minguante': 'Waning Moon'
   };
 
-  const isEnglish = window.LunarI18n.getLanguage() === 'en';
+  
 
   todayStage.textContent =
     state.month === 0 && state.day === 12
@@ -183,9 +184,25 @@ if (todayStage) {
       : (isEnglish ? (phaseNamesEn[stage] || stage) : stage);
 }
 
- const todayDate=$('today-moon-date');if(todayDate){if(state.month===0&&state.day===12)todayDate.innerHTML=isEnglish
-  ? 'Since Jan 12, 04:27<br>Until Jan 14, 17:19'
-  : 'Desde 12 jan, 04h27<br>Até 14 jan, 17h19'else todayDate.innerHTML=(window.LunarI18n.translations[window.LunarI18n.getLanguage()].selectedDate + ': ')+String(state.day).padStart(2,'0')+' '+months[state.month]+' 2027'}
+ const todayDate = $('today-moon-date');
+
+if (todayDate) {
+  if (state.month === 0 && state.day === 12) {
+    todayDate.innerHTML = isEnglish
+      ? 'Since Jan 12, 04:27<br>Until Jan 14, 17:19'
+      : 'Desde 12 jan, 04h27<br>Até 14 jan, 17h19';
+  } else {
+    todayDate.textContent =
+      window.LunarI18n.translations[
+        window.LunarI18n.getLanguage()
+      ].selectedDate +
+      ': ' +
+      String(state.day).padStart(2, '0') +
+      ' ' +
+      months[state.month] +
+      ' 2027';
+  }
+}
  const todaySign=$('today-moon-sign');if(todaySign){const latest=[...ingressEvents].reverse().find(e=>localParts(e.date).key<=selectedKey());todaySign.textContent=(state.month===0&&state.day>=12&&state.day<=14)?'♉':latest?ingressSymbols[latest.sign]:'✦'}
  disk.setAttribute('aria-label', stage + ', ' + window.LunarI18n.translations[window.LunarI18n.getLanguage()].estimatedIllumination + ' ' + Math.round(illuminated * 100) + ' por cento');
  const x= Math.cos(2*Math.PI*fraction);
