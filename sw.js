@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE = 'conexao-lunar-2027-v4';
+const CACHE = 'conexao-lunar-2027-v5';
 const ASSETS = [
   './',
   './index.html',
