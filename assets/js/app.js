@@ -12,7 +12,11 @@ document.addEventListener('lunar:languagechange', () => {
 });
 
 
-const weekdays=['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+
+const weekdays = window.LunarI18n.translations[
+  window.LunarI18n.getLanguage()
+].weekdays;
+
 const state={year:2027,month:0,day:12};
 const $=id=>document.getElementById(id);
 function key(){return 'alchemy-lunar-2027:nota:'+String(state.month+1).padStart(2,'0')+'-'+String(state.day).padStart(2,'0')}
