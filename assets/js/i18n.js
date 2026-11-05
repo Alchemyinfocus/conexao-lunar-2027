@@ -217,6 +217,7 @@ if (upcomingTitle) {
   document.addEventListener('DOMContentLoaded', updateNavigationLanguage);
 document.addEventListener('lunar:languagechange', updateMoonTodayLanguage);
 document.addEventListener('DOMContentLoaded', updateMoonTodayLanguage);
+  document.addEventListener('lunar:calendarupdated', updateMoonTodayLanguage);
   function initializeLanguageButtons() {
     const ptButton = document.getElementById('lang-pt');
     const enButton = document.getElementById('lang-en');
