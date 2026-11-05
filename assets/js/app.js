@@ -117,10 +117,10 @@ function renderPhase(){
  const today=selectedKey(),matches=phaseEvents.filter(p=>localParts(p.date).key===today);
  const current=Date.parse(today+'T12:00:00Z');
  const upcoming=(state.month===0&&state.day===12)?[
-  {date:new Date('2027-01-26T14:32:00Z'),icon:'☾',label:'Lua em Gêmeos'},
-  {date:new Date('2027-01-22T08:17:00Z'),icon:'○',label:'Lua Cheia'},
-  {date:new Date('2027-01-29T21:49:00Z'),icon:'◑',label:'Lua Minguante'},
-  {date:new Date('2027-02-01T06:21:00Z'),icon:'♈',label:'Lua em Áries'}
+  {date:new Date('2027-01-26T14:32:00Z'),icon:'☾',label:window.LunarI18n.getLanguage()==='en'?'Moon in Gemini':'Lua em Gêmeos}'
+  {date:new Date('2027-01-22T08:17:00Z'),icon:'○',label:phaseNames.cheia},
+  {date:new Date('2027-01-29T21:49:00Z'),icon:'◑',label:phaseNames.minguante},
+  {date:new Date('2027-02-01T06:21:00Z'),icon:'♈',label:window.LunarI18n.getLanguage()==='en'?'Moon in Aries':'Lua em Áries'},
  ]:[
   ...phaseEvents.filter(p=>p.date.getTime()>current).map(p=>({date:p.date,icon:phaseIcons[p.type],label:phaseNames[p.type]})),
   ...ingressEvents.filter(p=>p.date.getTime()>current).map(p=>({date:p.date,icon:ingressSymbols[p.sign],label:'Lua em '+ingressSigns[p.sign]}))
