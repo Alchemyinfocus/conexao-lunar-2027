@@ -101,6 +101,13 @@ const phaseRows=[
 let phaseNames = window.LunarI18n.translations[
   window.LunarI18n.getLanguage()
 ].phases;
+document.addEventListener('lunar:languagechange', () => {
+  phaseNames = window.LunarI18n.translations[
+    window.LunarI18n.getLanguage()
+  ].phases;
+
+  renderPhase();
+});
 const phaseIcons={nova:'●',crescente:'◐',cheia:'○',minguante:'◑'};
 const phaseEvents=phaseRows.map(([utc,type])=>({date:new Date(utc+'Z'),type}));
 function localParts(date){const parts=new Intl.DateTimeFormat('en-CA',{timeZone:$('timezone').value,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(date);const v=Object.fromEntries(parts.map(p=>[p.type,p.value]));return {key:v.year+'-'+v.month+'-'+v.day,time:v.hour+':'+v.minute}}
