@@ -191,7 +191,9 @@ if (upcomingTitle) {
     const messages = translations[language].cycleMessages;
 
     if (stage && messages) {
-      const phase = stage.textContent;
+    const phase = stage.textContent
+  .replace(/\s+(?:in|em)\s+.+$/i, '')
+  .trim();
       const phaseKeys = Object.keys(translations.pt.cycleMessages);
       const englishPhases = {
         'New Moon': 'Lua Nova',
