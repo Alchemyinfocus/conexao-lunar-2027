@@ -157,6 +157,11 @@ estimatedIllumination: 'estimated illumination',
   if (title) {
     title.textContent = translate('moonToday');
   }
+    const upcomingTitle = document.getElementById('upcoming-title');
+
+if (upcomingTitle) {
+  upcomingTitle.textContent = translate('upcomingEvents');
+}
 }
 
   document.addEventListener('lunar:languagechange', updateNavigationLanguage);
