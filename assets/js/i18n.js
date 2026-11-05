@@ -183,7 +183,11 @@ calendarNote: 'Civil dates verified against the Gregorian calendar. Main lunar p
   if (title) {
     title.textContent = translate('moonToday');
   }
-    
+    const cycleEnergyLabel = document.getElementById('cycle-energy-label');
+
+if (cycleEnergyLabel) {
+  cycleEnergyLabel.textContent = translate('cycleEnergy');
+}
 const calendarNote = document.getElementById('calendar-note');
 
 if (calendarNote) {
