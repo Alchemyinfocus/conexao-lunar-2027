@@ -35,7 +35,17 @@ estimatedIllumination: 'iluminação estimada',
         crescente: 'Quarto Crescente',
         cheia: 'Lua Cheia',
         minguante: 'Quarto Minguante'
-      }
+      },
+          cycleMessages: {
+      'Lua Nova': 'Um novo ciclo começa. Recolha-se, escute sua intuição e plante suas intenções.',
+      'Lua Crescente': 'Suas intenções começam a ganhar forma. Cultive a confiança e dê os primeiros passos.',
+      'Quarto Crescente': 'É tempo de agir, enfrentar obstáculos e fortalecer suas decisões.',
+      'Gibosa Crescente': 'Aprimore seus planos, ajuste os detalhes e prepare-se para os resultados.',
+      'Lua Cheia': 'Um momento de plenitude e revelação. Reconheça suas conquistas e acolha suas emoções.',
+      'Gibosa Minguante': 'Compartilhe aprendizados, pratique a gratidão e reconheça o que amadureceu.',
+      'Quarto Minguante': 'Reavalie suas escolhas, libere o que não serve mais e reorganize suas prioridades.',
+      'Lua Minguante': 'Desacelere, descanse e permita que o silêncio prepare o próximo recomeço.'
+    },
     },
 
     en: {
@@ -68,7 +78,17 @@ estimatedIllumination: 'estimated illumination',
         crescente: 'First Quarter',
         cheia: 'Full Moon',
         minguante: 'Last Quarter'
-      }
+      },
+          cycleMessages: {
+      'Lua Nova': 'A new cycle begins. Turn inward, listen to your intuition, and plant your intentions.',
+      'Lua Crescente': 'Your intentions begin to take shape. Cultivate confidence and take the first steps.',
+      'Quarto Crescente': 'It is time to act, face obstacles, and strengthen your decisions.',
+      'Gibosa Crescente': 'Refine your plans, adjust the details, and prepare for the results.',
+      'Lua Cheia': 'A moment of fullness and revelation. Recognize your achievements and embrace your emotions.',
+      'Gibosa Minguante': 'Share what you have learned, practice gratitude, and acknowledge your growth.',
+      'Quarto Minguante': 'Reevaluate your choices, release what no longer serves you, and reorganize your priorities.',
+      'Lua Minguante': 'Slow down, rest, and allow silence to prepare the next beginning.'
+    },
     }
   };
 
