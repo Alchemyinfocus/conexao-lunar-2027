@@ -17,9 +17,12 @@ const ASSETS = [
   './assets/js/install.js',
   './assets/images/landing-aprovada.png',
   
-  './assets/icons/conexao-lunar-icon-192.png',
-  './assets/icons/conexao-lunar-icon-512.png',
-  './assets/icons/conexao-lunar-favicon.png',
+ 
+  './assets/icons/conexao-lunar-icon-192-corrigido.png',
+  './assets/icons/conexao-lunar-icon-512-corrigido.png',
+  './assets/icons/conexao-lunar-favicon-corrigido.png',
+  './assets/icons/conexao-lunar-icon-maskable-512.png',
+
 
   './manifest.webmanifest'
 ];
