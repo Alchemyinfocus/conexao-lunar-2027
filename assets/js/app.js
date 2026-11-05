@@ -98,7 +98,7 @@ const phaseRows=[
 ['2027-11-28T03:24','nova'],['2027-12-06T05:22','crescente'],['2027-12-13T16:09','cheia'],['2027-12-20T09:11','minguante'],
 ['2027-12-27T20:12','nova']
 ];
-const phaseNames = window.LunarI18n.translations[
+let phaseNames = window.LunarI18n.translations[
   window.LunarI18n.getLanguage()
 ].phases;
 const phaseIcons={nova:'●',crescente:'◐',cheia:'○',minguante:'◑'};
