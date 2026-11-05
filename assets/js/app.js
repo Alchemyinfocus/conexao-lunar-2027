@@ -161,7 +161,7 @@ function updateMoonVisual(){
  const todayStage=$('today-moon-stage');if(todayStage)todayStage.textContent=(state.month===0&&state.day>=12&&state.day<=14)?'Lua Crescente em Touro':stage;
  const todayDate=$('today-moon-date');if(todayDate){if(state.month===0&&state.day===12)todayDate.innerHTML='Desde 12 jan, 04h27<br>Até 14 jan, 17h19';else todayDate.innerHTML=(window.LunarI18n.translations[window.LunarI18n.getLanguage()].selectedDate + ': ')+String(state.day).padStart(2,'0')+' '+months[state.month]+' 2027'}
  const todaySign=$('today-moon-sign');if(todaySign){const latest=[...ingressEvents].reverse().find(e=>localParts(e.date).key<=selectedKey());todaySign.textContent=(state.month===0&&state.day>=12&&state.day<=14)?'♉':latest?ingressSymbols[latest.sign]:'✦'}
- disk.setAttribute('aria-label',stage+', iluminação aproximada '+Math.round(illuminated*100)+' por cento');
+ disk.setAttribute('aria-label',stage+',window.LunarI18n.translations[window.LunarI18n.getLanguage()].estimatedIllumination+' ''+Math.round(illuminated*100)+' por cento');
  const x= Math.cos(2*Math.PI*fraction);
  const rx=Math.max(.01,Math.abs(x)*48);const lit='#ead49e',dark='#102b20';const right=waxing;const outer=right?'M 48 0 A 48 48 0 0 1 48 96':'M 48 0 A 48 48 0 0 0 48 96';const sweep=(x>=0)!==right?1:0;const path=outer+' A '+rx+' 48 0 0 '+sweep+' 48 0 Z';disk.innerHTML='<svg viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="48" fill="'+dark+'"/><path d="'+path+'" fill="'+lit+'"/></svg>';
 }
