@@ -104,5 +104,39 @@
     setLanguage,
     translations
   };
+  
+  function updateLanguageButtons() {
+    const ptButton = document.getElementById('lang-pt');
+    const enButton = document.getElementById('lang-en');
+
+    if (!ptButton || !enButton) return;
+
+    ptButton.classList.toggle('lang-active', currentLanguage === 'pt');
+    enButton.classList.toggle('lang-active', currentLanguage === 'en');
+
+    ptButton.setAttribute('aria-pressed', String(currentLanguage === 'pt'));
+    enButton.setAttribute('aria-pressed', String(currentLanguage === 'en'));
+  }
+
+  function initializeLanguageButtons() {
+    const ptButton = document.getElementById('lang-pt');
+    const enButton = document.getElementById('lang-en');
+
+    if (!ptButton || !enButton) return;
+
+    ptButton.addEventListener('click', () => setLanguage('pt'));
+    enButton.addEventListener('click', () => setLanguage('en'));
+
+    document.addEventListener('lunar:languagechange', updateLanguageButtons);
+
+    updateLanguageButtons();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeLanguageButtons);
+  } else {
+    initializeLanguageButtons();
+  }
+
 })();
 
