@@ -602,3 +602,65 @@ CSS
   opacity: 0.55;
   cursor: not-allowed;
 }
+
+/* Seletor de idioma PT | EN — barra superior */
+.approved-nav .language-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 3px 7px;
+  border: 1px solid rgba(215, 172, 84, 0.65);
+  border-radius: 6px;
+  background: rgba(7, 23, 14, 0.55);
+  color: #d7ac54;
+  font-family: Georgia, serif;
+  font-size: 12px;
+}
+
+.approved-nav .language-switch button {
+  border: 0;
+  background: transparent;
+  color: #d7ac54;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 5px 4px;
+  cursor: pointer;
+}
+
+.approved-nav .language-switch button.lang-active {
+  color: #fff2cf;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.approved-nav .language-switch button:hover {
+  color: #ffffff;
+}
+
+.approved-nav .language-switch button:focus-visible {
+  outline: 2px solid #f0cf83;
+  outline-offset: 2px;
+}
+
+@media (max-width: 650px) {
+  .approved-nav .language-switch {
+    gap: 2px;
+    padding: 2px 4px;
+  }
+
+  .approved-nav .language-switch button {
+    font-size: 11px;
+    padding: 4px 2px;
+  }
+}
+
+@media print {
+  .approved-nav .language-switch {
+    display: none !important;
+  }
+}
