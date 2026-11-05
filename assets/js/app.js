@@ -159,7 +159,7 @@ function updateMoonVisual(){
  }[stage];
  const todayMoon=$('today-moon-image');if(todayMoon){todayMoon.src='assets/moon-phases/'+phaseAsset;todayMoon.alt=stage}
  const todayStage=$('today-moon-stage');if(todayStage)todayStage.textContent=(state.month===0&&state.day>=12&&state.day<=14)?'Lua Crescente em Touro':stage;
- const todayDate=$('today-moon-date');if(todayDate){if(state.month===0&&state.day===12)todayDate.innerHTML='Desde 12 jan, 04h27<br>Até 14 jan, 17h19';else todayDate.innerHTML='Data selecionada: '+String(state.day).padStart(2,'0')+' '+months[state.month]+' 2027'}
+ const todayDate=$('today-moon-date');if(todayDate){if(state.month===0&&state.day===12)todayDate.innerHTML='Desde 12 jan, 04h27<br>Até 14 jan, 17h19';else todayDate.innerHTML=(window.LunarI18n.translations[window.LunarI18n.getLanguage()].selectedDate + ': ')+String(state.day).padStart(2,'0')+' '+months[state.month]+' 2027'}
  const todaySign=$('today-moon-sign');if(todaySign){const latest=[...ingressEvents].reverse().find(e=>localParts(e.date).key<=selectedKey());todaySign.textContent=(state.month===0&&state.day>=12&&state.day<=14)?'♉':latest?ingressSymbols[latest.sign]:'✦'}
  disk.setAttribute('aria-label',stage+', iluminação aproximada '+Math.round(illuminated*100)+' por cento');
  const x= Math.cos(2*Math.PI*fraction);
