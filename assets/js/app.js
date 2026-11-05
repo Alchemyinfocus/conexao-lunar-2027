@@ -98,7 +98,9 @@ const phaseRows=[
 ['2027-11-28T03:24','nova'],['2027-12-06T05:22','crescente'],['2027-12-13T16:09','cheia'],['2027-12-20T09:11','minguante'],
 ['2027-12-27T20:12','nova']
 ];
-const phaseNames={nova:'Lua Nova',crescente:'Quarto Crescente',cheia:'Lua Cheia',minguante:'Quarto Minguante'};
+const phaseNames = window.LunarI18n.translations[
+  window.LunarI18n.getLanguage()
+].phases;
 const phaseIcons={nova:'●',crescente:'◐',cheia:'○',minguante:'◑'};
 const phaseEvents=phaseRows.map(([utc,type])=>({date:new Date(utc+'Z'),type}));
 function localParts(date){const parts=new Intl.DateTimeFormat('en-CA',{timeZone:$('timezone').value,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(date);const v=Object.fromEntries(parts.map(p=>[p.type,p.value]));return {key:v.year+'-'+v.month+'-'+v.day,time:v.hour+':'+v.minute}}
