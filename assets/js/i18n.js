@@ -66,6 +66,9 @@ since: 'Since',
 until: 'Until',
 selectedDate: 'Selected date',
 estimatedIllumination: 'estimated illumination',
+      
+calendarNote: 'Civil dates verified against the Gregorian calendar. Main lunar phases: United States Naval Observatory (USNO).',
+
       months: [
         'January', 'February', 'March', 'April',
         'May', 'June', 'July', 'August',
