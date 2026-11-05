@@ -8,12 +8,16 @@ document.addEventListener('lunar:languagechange', () => {
     window.LunarI18n.getLanguage()
   ].months;
 
+  weekdays = window.LunarI18n.translations[
+    window.LunarI18n.getLanguage()
+  ].weekdays;
+
   render();
 });
 
 
 
-const weekdays = window.LunarI18n.translations[
+let weekdays = window.LunarI18n.translations[
   window.LunarI18n.getLanguage()
 ].weekdays;
 
