@@ -12,6 +12,8 @@
       diary: 'Diário Lunar',
       planning: 'Planejamento',
       settings: 'Configurações',
+      moonToday: 'A LUA HOJE',
+cycleEnergy: 'ENERGIA DO CICLO',
       months: [
         'Janeiro', 'Fevereiro', 'Março', 'Abril',
         'Maio', 'Junho', 'Julho', 'Agosto',
@@ -37,6 +39,8 @@
       diary: 'Lunar Journal',
       planning: 'Planning',
       settings: 'Settings',
+      moonToday: 'THE MOON TODAY',
+cycleEnergy: 'CYCLE ENERGY',
       months: [
         'January', 'February', 'March', 'April',
         'May', 'June', 'July', 'August',
