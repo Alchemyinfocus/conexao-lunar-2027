@@ -135,6 +135,7 @@ function renderPhase(){
 /* Representação aproximada/* Representação aproximada baseada na fração do ciclo sinódico entre Luas Novas.
    Não substitui efemérides de posição/iluminação lunar de alta precisão. */
 function updateMoonVisual(){
+  
  const selected=new Date(Date.UTC(2027,state.month,state.day,12));
  const newMoons=phaseEvents.filter(e=>e.type==='nova').map(e=>e.date.getTime());
  const anchor=Date.parse('2026-12-09T00:00:00Z');
@@ -187,7 +188,7 @@ if (todayStage) {
  disk.setAttribute('aria-label', stage + ', ' + window.LunarI18n.translations[window.LunarI18n.getLanguage()].estimatedIllumination + ' ' + Math.round(illuminated * 100) + ' por cento');
  const x= Math.cos(2*Math.PI*fraction);
  const rx=Math.max(.01,Math.abs(x)*48);const lit='#ead49e',dark='#102b20';const right=waxing;const outer=right?'M 48 0 A 48 48 0 0 1 48 96':'M 48 0 A 48 48 0 0 0 48 96';const sweep=(x>=0)!==right?1:0;const path=outer+' A '+rx+' 48 0 0 '+sweep+' 48 0 Z';disk.innerHTML='<svg viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="48" fill="'+dark+'"/><path d="'+path+'" fill="'+lit+'"/></svg>';
-}
+document.dispatchEvent(new Event('lunar:calendarupdated'));}
 /* PRÉVIA TÉCNICA — janeiro a dezembro de 2027.
    Lua geocêntrica, zodíaco tropical, fronteiras de 30 graus.
    Calculado com PySwissEph 2.10.03, modo Moshier (FLG_MOSEPH),
