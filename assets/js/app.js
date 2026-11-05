@@ -1,6 +1,16 @@
 'use strict';
 
-const months = window.LunarI18n.translations[window.LunarI18n.getLanguage()].months;
+
+let months = window.LunarI18n.translations[window.LunarI18n.getLanguage()].months;
+
+document.addEventListener('lunar:languagechange', () => {
+  months = window.LunarI18n.translations[
+    window.LunarI18n.getLanguage()
+  ].months;
+
+  render();
+});
+
 
 const weekdays=['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
 const state={year:2027,month:0,day:12};
