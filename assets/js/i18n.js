@@ -139,10 +139,18 @@ cycleEnergy: 'CYCLE ENERGY',
       }
     });
   }
+  function updateMoonTodayLanguage() {
+  const title = document.getElementById('moon-today-title');
+
+  if (title) {
+    title.textContent = translate('moonToday');
+  }
+}
 
   document.addEventListener('lunar:languagechange', updateNavigationLanguage);
   document.addEventListener('DOMContentLoaded', updateNavigationLanguage);
-
+document.addEventListener('lunar:languagechange', updateMoonTodayLanguage);
+document.addEventListener('DOMContentLoaded', updateMoonTodayLanguage);
   function initializeLanguageButtons() {
     const ptButton = document.getElementById('lang-pt');
     const enButton = document.getElementById('lang-en');
