@@ -183,7 +183,15 @@ calendarNote: 'Civil dates verified against the Gregorian calendar. Main lunar p
   if (title) {
     title.textContent = translate('moonToday');
   }
-    const upcomingTitle = document.getElementById('upcoming-title');
+    
+const calendarNote = document.getElementById('calendar-note');
+
+if (calendarNote) {
+  calendarNote.textContent = translate('calendarNote');
+}
+
+const upcomingTitle = document.getElementById('upcoming-title');
+    
 
 if (upcomingTitle) {
   upcomingTitle.textContent = translate('upcomingEvents');
