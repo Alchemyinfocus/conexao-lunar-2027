@@ -182,6 +182,35 @@ estimatedIllumination: 'estimated illumination',
 if (upcomingTitle) {
   upcomingTitle.textContent = translate('upcomingEvents');
 }
+    
+  const cycleMessage = document.getElementById('cycle-message');
+
+  if (cycleMessage) {
+    const stage = document.getElementById('today-moon-stage');
+    const language = getLanguage();
+    const messages = translations[language].cycleMessages;
+
+    if (stage && messages) {
+      const phase = stage.textContent;
+      const phaseKeys = Object.keys(translations.pt.cycleMessages);
+      const englishPhases = {
+        'New Moon': 'Lua Nova',
+        'Waxing Moon': 'Lua Crescente',
+        'First Quarter': 'Quarto Crescente',
+        'Waxing Gibbous': 'Gibosa Crescente',
+        'Full Moon': 'Lua Cheia',
+        'Waning Gibbous': 'Gibosa Minguante',
+        'Last Quarter': 'Quarto Minguante',
+        'Waning Moon': 'Lua Minguante'
+      };
+
+      const phaseKey = englishPhases[phase] || phase;
+      if (phaseKeys.includes(phaseKey)) {
+        cycleMessage.textContent = messages[phaseKey];
+      }
+    }
+  }
+
 }
 
   document.addEventListener('lunar:languagechange', updateNavigationLanguage);
