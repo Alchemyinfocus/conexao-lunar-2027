@@ -4,6 +4,43 @@ const monthSelect=document.getElementById('phases-month');
 const timezoneSelect=document.getElementById('phases-timezone');
 const list=document.getElementById('phases-list');
 const mainTimezone=document.getElementById('timezone');
+function updatePhasesLanguage() {
+  const t = window.LunarI18n.translate;
+  const language = window.LunarI18n.getLanguage();
+
+  const section = document.getElementById('ciclos');
+  if (!section) return;
+
+  const heading = section.querySelector('h2');
+  const description = section.querySelector('h2 + p');
+
+  if (heading) heading.textContent = t('phasesPageTitle');
+  if (description) description.textContent = t('phasesPageDescription');
+const monthLabel = section.querySelector('label[for="phases-month"]');
+const timezoneLabel = section.querySelector('label[for="phases-timezone"]');
+
+if (monthLabel) {
+  monthLabel.textContent = t('phasesSelectMonth');
+}
+
+if (timezoneLabel) {
+  timezoneLabel.textContent = t('phasesTimezone');
+}
+
+const paragraphs = section.querySelectorAll('p');
+
+paragraphs.forEach(p => {
+  if (p.textContent.includes('U.S. Naval Observatory')) {
+    p.textContent = t('phasesSource');
+  }
+});
+  const months = t('months');
+  if (Array.isArray(months)) {
+    Array.from(monthSelect.options).forEach((option, index) => {
+      if (months[index]) option.textContent = months[index];
+    });
+  }
+  }
 const names = {
   pt: {
     nova: 'Lua Nova',
@@ -47,5 +84,10 @@ timezoneSelect.addEventListener('change',()=>{mainTimezone.value=timezoneSelect.
 mainTimezone.addEventListener('change',()=>{timezoneSelect.value=mainTimezone.value;renderPhasesPage()});
 window.renderPhasesPage=()=>{timezoneSelect.value=mainTimezone.value;renderPhasesPage()};
 window.renderPhasesPage();
-document.addEventListener('lunar:languagechange', renderPhasesPage);
+document.addEventListener('lunar:languagechange', () => {
+  updatePhasesLanguage();
+  renderPhasesPage();
+});
+
+updatePhasesLanguage();
 })();
