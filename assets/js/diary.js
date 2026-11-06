@@ -16,7 +16,8 @@ const calendarStatus=document.getElementById('save-status');
   const restoreButton = document.getElementById('diary-restore');
 
   if (title) title.textContent = t('diaryTitle');
-  if (editor) editor.placeholder = t('diaryPlaceholder');
+ const noteField = document.getElementById('note');
+if (noteField) noteField.placeholder = t('diaryPlaceholder');
   if (exportButton) exportButton.textContent = t('diaryExport');
   if (restoreButton) restoreButton.textContent = t('diaryRestore');
 }
