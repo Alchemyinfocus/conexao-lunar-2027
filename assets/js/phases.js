@@ -10,6 +10,11 @@ function updatePhasesLanguage() {
 
   const section = document.getElementById('ciclos');
   if (!section) return;
+  const topTitle = document.getElementById('phases-title');
+
+if (topTitle) {
+  topTitle.textContent = t('cardPhasesTitle');
+}
 
   const heading = section.querySelector('h2');
   const description = section.querySelector('h2 + p');
