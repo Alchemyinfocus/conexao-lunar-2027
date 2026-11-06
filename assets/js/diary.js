@@ -12,14 +12,21 @@ const calendarStatus=document.getElementById('save-status');
 
   const t = window.LunarI18n.translate;
   const title = document.querySelector('.diary-card h3');
-  const exportButton = document.getElementById('diary-backup');
-  const restoreButton = document.getElementById('diary-restore');
+  const exportButton = document.getElementById('backup');
+  const restoreButton = document.querySelector('.restore-label');
 
   if (title) title.textContent = t('diaryTitle');
  const noteField = document.getElementById('note');
 if (noteField) noteField.placeholder = t('diaryPlaceholder');
   if (exportButton) exportButton.textContent = t('diaryExport');
   if (restoreButton) restoreButton.textContent = t('diaryRestore');
+  if (calendarStatus && [
+  'As notas são salvas neste navegador.',
+  'As notas são salvas neste navegador',
+  'Notes are saved in this browser'
+].includes(calendarStatus.textContent.trim())) {
+  calendarStatus.textContent = t('diaryStorageNote');
+}
 }
 
 document.addEventListener('lunar:languagechange', updateDiaryLanguage);
