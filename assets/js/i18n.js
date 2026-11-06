@@ -330,5 +330,16 @@ document.addEventListener('DOMContentLoaded', updateMoonTodayLanguage);
     initializeLanguageButtons();
   }
 
-})();
+function updateHeroLanguage() {
+  const title = document.getElementById('landing-title');
+  const subtitle = document.querySelector('.approved-hero-kicker');
+  const description = document.querySelector('.approved-hero-subtitle');
 
+  if (title) title.textContent = translate('heroTitle');
+  if (subtitle) subtitle.textContent = translate('heroSubtitle');
+  if (description) description.textContent = translate('heroDescription');
+}
+
+document.addEventListener('lunar:languagechange', updateHeroLanguage);
+document.addEventListener('DOMContentLoaded', updateHeroLanguage);
+  })();
