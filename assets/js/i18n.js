@@ -6,6 +6,9 @@
 
   const translations = {
     pt: {
+      heroTitle: 'Conexão Lunar 2027',
+heroSubtitle: 'PLANNER · CALENDÁRIO · CICLOS · DIÁRIO',
+heroDescription: 'Acompanhe a Lua, compreenda seus ciclos e caminhe em sintonia com o tempo natural.',
       home: 'Início',
       calendar: 'Calendário',
       cycles: 'Ciclos',
@@ -69,6 +72,9 @@ calendarNote: 'Datas civis verificadas pelo calendário gregoriano. Fases princi
     },
 
     en: {
+      heroTitle: 'Lunar Connection 2027',
+heroSubtitle: 'PLANNER · CALENDAR · CYCLES · JOURNAL',
+heroDescription: 'Follow the Moon, understand its cycles, and move in harmony with the natural rhythm of time.',
       home: 'Home',
       calendar: 'Calendar',
       cycles: 'Cycles',
