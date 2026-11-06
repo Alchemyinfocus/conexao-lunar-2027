@@ -266,7 +266,39 @@ if (upcomingTitle) {
   }
 
 }
+function updateHomeCardsLanguage() {
+  const keys = [
+    ['cardCalendarTitle', 'cardCalendarSubtitle'],
+    ['cardPhasesTitle', 'cardPhasesSubtitle'],
+    ['cardIngressesTitle', 'cardIngressesSubtitle'],
+    ['cardDiaryTitle', 'cardDiarySubtitle'],
+    ['cardPlanningTitle', 'cardPlanningSubtitle'],
+    ['cardSettingsTitle', 'cardSettingsSubtitle']
+  ];
 
+  const cards = document.querySelectorAll(
+  '.rebuild-feature-grid a'
+  );
+
+  if (cards.length !== 6) return;
+
+  cards.forEach((card, index) => {
+    const title = card.querySelector('strong');
+    const subtitle = card.querySelector('small');
+
+    if (title) title.textContent = translate(keys[index][0]);
+    if (subtitle) subtitle.textContent = translate(keys[index][1]);
+  });
+}
+
+document.addEventListener(
+  'lunar:languagechange',
+  updateHomeCardsLanguage
+);
+document.addEventListener(
+  'DOMContentLoaded',
+  updateHomeCardsLanguage
+);
   document.addEventListener('lunar:languagechange', updateNavigationLanguage);
   document.addEventListener('DOMContentLoaded', updateNavigationLanguage);
 document.addEventListener('lunar:languagechange', updateMoonTodayLanguage);
