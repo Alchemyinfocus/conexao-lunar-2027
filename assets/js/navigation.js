@@ -53,7 +53,7 @@ window.addEventListener('popstate',()=>show(Object.keys(targets).find(key=>'#'+t
   };
 
   title.textContent = window.LunarI18n.translate(keys[page]);
-  back.textContent = window.LunarI18n.translate('backToHome');
+ back.textContent = (window.LunarI18n.getLanguage() === 'en' ? '← Back to Home' : '← Voltar à Página Principal');
 });
 show(Object.keys(targets).find(key=>'#'+targets[key]===location.hash)||'home',false);
 })();
