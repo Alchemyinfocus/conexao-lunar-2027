@@ -7,6 +7,22 @@ const dayLabel=document.getElementById('diary-day-label');
 const prefix='alchemy-lunar-2027:nota:';
 const calendarNote=document.getElementById('note');
 const calendarStatus=document.getElementById('save-status');
+ function updateDiaryLanguage() {
+  if (!window.LunarI18n) return;
+
+  const t = window.LunarI18n.translate;
+  const title = document.querySelector('.diary-card h3');
+  const exportButton = document.getElementById('diary-backup');
+  const restoreButton = document.getElementById('diary-restore');
+
+  if (title) title.textContent = t('diaryTitle');
+  if (editor) editor.placeholder = t('diaryPlaceholder');
+  if (exportButton) exportButton.textContent = t('diaryExport');
+  if (restoreButton) restoreButton.textContent = t('diaryRestore');
+}
+
+document.addEventListener('lunar:languagechange', updateDiaryLanguage);
+document.addEventListener('DOMContentLoaded', updateDiaryLanguage);
 function noteKey(){return prefix+date.value.slice(5)}
 function validDate(value){if(!/^2027-\d{2}-\d{2}$/.test(value))return false;const d=new Date(value+'T12:00:00Z');return !Number.isNaN(d.getTime())&&d.toISOString().slice(0,10)===value}
 function loadDiary(){
