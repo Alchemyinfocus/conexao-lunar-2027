@@ -780,13 +780,9 @@ CSS
   .approved-hero-moon {
     bottom: -50px;
   }
-  .approved-hero-object.astrolabe {
-    bottom: -18px;
-  }
-  .approved-hero-object.lantern {
-    bottom: -12px;
-  }
+  .approved-hero-object.astrolabe,
+  .approved-hero-object.lantern,
   .approved-hero-object.books {
-    bottom: -18px;
+    bottom: 0;
   }
 }
