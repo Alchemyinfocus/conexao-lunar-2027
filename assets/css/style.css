@@ -664,3 +664,11 @@ CSS
     display: none !important;
   }
 }
+
+/* Mobile: preserve both PT and EN options inside the language switch.
+   The generic mobile rule hides the first button in nav actions. */
+@media (max-width: 650px) {
+  .approved-nav .approved-nav-actions .language-switch button:first-child {
+    display: inline-block;
+  }
+}
