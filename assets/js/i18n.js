@@ -297,8 +297,14 @@ function updateLandingDiaryLanguage() {
   const note = card.querySelector('#note');
   if (note) note.placeholder = translate('diaryPlaceholder');
   const status = card.querySelector('#save-status');
-  if (status && (!status.dataset.noteState || status.dataset.noteState === 'default')) {
-    status.textContent = translate('diaryStorageNote') + '.';
+  if (status) {
+    const en = getLanguage() === 'en';
+    const state = status.dataset.noteState || 'default';
+    status.textContent = state === 'saved'
+      ? (en ? 'Note saved in this browser; export a backup to protect it.' : 'Nota salva neste navegador; exporte um backup para protegê-la.')
+      : state === 'error'
+        ? (en ? 'Local storage is unavailable in this browser.' : 'Armazenamento local indisponível neste navegador.')
+        : translate('diaryStorageNote') + '.';
   }
   const exportButton = card.querySelector('#backup');
   if (exportButton) exportButton.textContent = translate('diaryExport');
