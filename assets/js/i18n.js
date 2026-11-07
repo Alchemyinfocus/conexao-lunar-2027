@@ -284,6 +284,37 @@ if (upcomingTitle) {
   }
 
 }
+function updateLandingDiaryLanguage() {
+  const card = document.querySelector('.movement.diary-card');
+  if (!card) return;
+  const heading = card.querySelector('h3');
+  if (heading) {
+    const textNode = Array.from(heading.childNodes).find(node =>
+      node.nodeType === Node.TEXT_NODE && node.textContent.trim()
+    );
+    if (textNode) textNode.textContent = ' ' + translate('diaryTitle') + ' ';
+  }
+  const note = card.querySelector('#note');
+  if (note) note.placeholder = translate('diaryPlaceholder');
+  const status = card.querySelector('#save-status');
+  if (status && (!status.dataset.noteState || status.dataset.noteState === 'default')) {
+    status.textContent = translate('diaryStorageNote') + '.';
+  }
+  const exportButton = card.querySelector('#backup');
+  if (exportButton) exportButton.textContent = translate('diaryExport');
+  const restoreLabel = card.querySelector('.restore-label');
+  if (restoreLabel) {
+    const labelNode = Array.from(restoreLabel.childNodes).find(node =>
+      node.nodeType === Node.TEXT_NODE && node.textContent.trim()
+    );
+    if (labelNode) labelNode.textContent = translate('diaryRestore') + ' ';
+  }
+  const expand = card.querySelector('.diary-expand');
+  if (expand) expand.setAttribute('aria-label', getLanguage() === 'en' ? 'Expand journal' : 'Expandir diário');
+}
+document.addEventListener('lunar:languagechange', updateLandingDiaryLanguage);
+document.addEventListener('DOMContentLoaded', updateLandingDiaryLanguage);
+
 function updateHomeCardsLanguage() {
   const keys = [
     ['cardCalendarTitle', 'cardCalendarSubtitle'],
