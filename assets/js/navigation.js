@@ -29,6 +29,7 @@ function show(page,historyChange){
   };
 
   title.textContent = window.LunarI18n.translate(keys[page]);
+  back.textContent = (window.LunarI18n.getLanguage() === 'en' ? '← Back to Home' : '← Voltar à Página Principal');
 }
  for(const section of sections.querySelectorAll('.feature-content'))section.hidden=section.id!==targets[page];
  const render={phases:'renderPhasesPage',ingresses:'renderIngressesPage',diary:'renderDiaryPage',planning:'renderPlanningPage',settings:'renderSettingsPage'}[page];
