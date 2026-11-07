@@ -771,3 +771,22 @@ CSS
     z-index: 4;
   }
 }
+
+/* Mobile: ground decorative objects and sink the moon by one third. */
+@media (max-width: 650px) {
+  .approved-hero {
+    overflow: hidden;
+  }
+  .approved-hero-moon {
+    bottom: -50px;
+  }
+  .approved-hero-object.astrolabe {
+    bottom: -18px;
+  }
+  .approved-hero-object.lantern {
+    bottom: -12px;
+  }
+  .approved-hero-object.books {
+    bottom: -18px;
+  }
+}
