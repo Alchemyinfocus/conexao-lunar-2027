@@ -5,14 +5,14 @@
 (function () {
   "use strict";
   var files = {
-    pt: "docs/guia-oficial-pt.pdf",
-    en: "docs/official-user-guide-en.pdf"
+    pt: "/docs/Guia_Conexao_Lunar_2027_PT_Revisto_Telas_Reais.pdf",
+    en: "/docs/Lunar_Connection_2027_EN_Revised_Real_Screenshots.pdf"
   };
   var labels = {
     pt: { title: "Guia Oficial de Utilização", link: "Abrir guia em PDF", info: "Instruções completas do Conexão Lunar 2027." },
     en: { title: "Official User Guide", link: "Open PDF guide", info: "Complete instructions for Lunar Connection 2027." }
   };
-  var available = { pt: false, en: false };
+  var available = { pt: true, en: true };
   function language() {
     return (document.documentElement.lang || "").toLowerCase().startsWith("en") ? "en" : "pt";
   }
@@ -20,8 +20,7 @@
     var panel = document.getElementById("official-user-guide-panel");
     if (!panel) return;
     var lang = language();
-    panel.hidden = !available[lang];
-    if (!available[lang]) return;
+    panel.hidden = false;
     panel.querySelector("h3").textContent = labels[lang].title;
     panel.querySelector("p").textContent = labels[lang].info;
     var link = panel.querySelector("a");
@@ -35,7 +34,7 @@
     var panel = document.createElement("article");
     panel.className = "settings-panel";
     panel.id = "official-user-guide-panel";
-    panel.hidden = true;
+    panel.hidden = false;
     var heading = document.createElement("h3");
     var info = document.createElement("p");
     var link = document.createElement("a");
@@ -49,12 +48,6 @@
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
     document.getElementById("lang-pt")?.addEventListener("click", function () { setTimeout(render, 0); });
     document.getElementById("lang-en")?.addEventListener("click", function () { setTimeout(render, 0); });
-    Object.keys(files).forEach(function (lang) {
-      fetch(files[lang], { method: "HEAD", cache: "no-store" }).then(function (response) {
-        available[lang] = response.ok && (response.headers.get("content-type") || "").toLowerCase().includes("pdf");
-        render();
-      }).catch(function () { available[lang] = false; render(); });
-    });
     render();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
