@@ -784,3 +784,28 @@ CSS
   .approved-hero-object.lantern { bottom: 0; right: 15%; }
   .approved-hero-object.books { bottom: -10px; right: 4%; }
 }
+
+/* Mobile calendar: keep lunar phase labels legible within seven narrow columns. */
+@media (max-width: 650px) {
+  .rebuild-landing .day-meta {
+    font-size: clamp(8px, 1.85vw, 10px);
+    line-height: 1.14;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    min-width: 0;
+  }
+  .rebuild-landing .day-meta span {
+    display: block;
+    min-width: 0;
+  }
+  .rebuild-landing .day-meta img {
+    width: 11px;
+    height: 11px;
+    vertical-align: middle;
+  }
+  .rebuild-landing .day {
+    padding-left: 3px;
+    padding-right: 3px;
+    min-width: 0;
+  }
+}
