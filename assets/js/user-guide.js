@@ -1,5 +1,5 @@
 /* Guia Oficial — Conexão Lunar 2027.
- * Os PDFs devem ser publicados em docs/guia-oficial-pt.pdf e docs/official-user-guide-en.pdf.
+ * Os PDFs devem ser publicados em docs/Guia_Conexao_Lunar_2027_PT_Revisto_Telas_Reais.pdf e docs/Lunar_Connection_2027_EN_Revised_Real_Screenshots.pdf.
  * O link só é exibido se o arquivo estiver realmente disponível.
  */
 (function () {
