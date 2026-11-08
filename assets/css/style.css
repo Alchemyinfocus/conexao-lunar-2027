@@ -809,3 +809,17 @@ CSS
     min-width: 0;
   }
 }
+
+/* Mobile: never split zodiac sign names across lines inside calendar cells. */
+@media (max-width: 650px) {
+  .rebuild-landing #calendar-grid .day-meta {
+    font-size: clamp(7px, 1.6vw, 9px);
+    overflow-wrap: normal;
+    word-break: keep-all;
+    letter-spacing: -0.15px;
+  }
+  .rebuild-landing #calendar-grid .day-meta span {
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+}
