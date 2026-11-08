@@ -823,3 +823,49 @@ CSS
     word-break: keep-all;
   }
 }
+
+/* Internal pages only: two-row mobile header avoids overlap with branding/actions. */
+@media (max-width: 650px) {
+  #resource-view .approved-nav:has(#resource-title:not([hidden])) {
+    height: auto;
+    min-height: 64px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 54px auto;
+    align-items: center;
+    column-gap: 6px;
+    row-gap: 0;
+    padding: 4px 10px 8px;
+  }
+  #resource-view .approved-nav:has(#resource-title:not([hidden])) .approved-brand {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+  }
+  #resource-view .approved-nav:has(#resource-title:not([hidden])) .approved-nav-actions {
+    grid-column: 2;
+    grid-row: 1;
+    margin-left: 0;
+    align-items: center;
+  }
+  #resource-view .approved-nav:has(#resource-title:not([hidden])) #resource-title:not([hidden]) {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+    font-size: 1rem;
+    line-height: 1.2;
+    overflow-wrap: normal;
+    padding: 8px 4px 4px;
+  }
+  #resource-view .approved-nav:has(#resource-title:not([hidden])) #return-home:not([hidden]) {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: 154px;
+    padding: 7px 9px;
+    font-size: .78rem;
+    line-height: 1.2;
+    text-align: center;
+    justify-content: center;
+    white-space: normal;
+  }
+}
