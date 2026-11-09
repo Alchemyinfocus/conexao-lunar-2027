@@ -1,11 +1,54 @@
 'use strict';
-const months=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-const weekdays=['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
-const state={year:2027,month:0,day:1};
+
+
+let months = window.LunarI18n.translations[window.LunarI18n.getLanguage()].months;
+
+document.addEventListener('lunar:languagechange', () => {
+  months = window.LunarI18n.translations[
+    window.LunarI18n.getLanguage()
+  ].months;
+
+  weekdays = window.LunarI18n.translations[
+    window.LunarI18n.getLanguage()
+  ].weekdays;
+
+  render();
+});
+
+
+
+let weekdays = window.LunarI18n.translations[
+  window.LunarI18n.getLanguage()
+].weekdays;
+
+function updateCalendarWeekdays() {
+  const container = document.getElementById('calendar-weekdays');
+  if (!container) return;
+
+  const labels = window.LunarI18n.getLanguage() === 'en'
+    ? ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+    : ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+
+  container.querySelectorAll('span').forEach((span, index) => {
+    span.textContent = labels[index];
+  });
+}
+
+document.addEventListener('lunar:languagechange', updateCalendarWeekdays);
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', updateCalendarWeekdays);
+} else {
+  updateCalendarWeekdays();
+}
+
+const state={year:2027,month:0,day:12};
 const $=id=>document.getElementById(id);
 function key(){return 'alchemy-lunar-2027:nota:'+String(state.month+1).padStart(2,'0')+'-'+String(state.day).padStart(2,'0')}
 function storeNote(){try{localStorage.setItem(key(),$('note').value);window.lunarMarkUnsaved?.();$('save-status').textContent='Nota salva neste navegador; exporte um backup para protegê-la.'}catch(e){$('save-status').textContent='Armazenamento indisponível. Copie sua nota para não perdê-la.'}}
 function loadNote(){try{$('note').value=localStorage.getItem(key())||''}catch(e){$('note').value='';$('save-status').textContent='Armazenamento local indisponível neste navegador.'}}
+
+
 function render(){const first=new Date(2027,state.month,1).getDay(),days=new Date(2027,state.month+1,0).getDate();$('month-title').textContent=months[state.month]+' 2027';$('date-heading').textContent=state.day+' de '+months[state.month]+' de 2027';$('months').innerHTML='';months.forEach((name,i)=>{const b=document.createElement('button');b.textContent=name;b.setAttribute('aria-current',String(i===state.month));b.onclick=()=>{state.month=i;state.day=1;render()};$('months').append(b)});const grid=$('calendar-grid');grid.innerHTML='';for(let i=0;i<first;i++){const e=document.createElement('span');e.className='empty';grid.append(e)}for(let d=1;d<=days;d++){const b=document.createElement('button');b.className='day';b.textContent=d;b.setAttribute('role','gridcell');b.setAttribute('aria-label',d+' de '+months[state.month]+' de 2027');b.setAttribute('aria-selected',String(d===state.day));b.onclick=()=>{state.day=d;render()};grid.append(b)}const cells=first+days;for(let i=cells;i<Math.ceil(cells/7)*7;i++){const e=document.createElement('span');e.className='empty';grid.append(e)}loadNote();renderPhase();renderIngress()}
 function changeMonth(delta){state.month=(state.month+delta+12)%12;state.day=1;render()}
 $('prev').onclick=()=>changeMonth(-1);$('next').onclick=()=>changeMonth(1);$('note').addEventListener('input',storeNote);$('focus-note').onclick=()=>{$('note').focus();$('note').scrollIntoView({behavior:'smooth',block:'center'})};$('print').onclick=()=>window.print();$('export').onclick=()=>{alert('Na janela de impressão, escolha “Salvar como PDF”.');window.print()};$('today').onclick=()=>{const now=new Date();if(now.getFullYear()!==2027){alert('Este planner corresponde a 2027. A data atual está fora do ano do produto.');return}state.month=now.getMonth();state.day=now.getDate();render()};$('timezone').onchange=()=>{try{localStorage.setItem('alchemy-lunar-2027:timezone',$('timezone').value)}catch(e){}render();renderIngress()};try{const saved=localStorage.getItem('alchemy-lunar-2027:timezone');if(saved&&[...$('timezone').options].some(o=>o.value===saved))$('timezone').value=saved}catch(e){}
@@ -57,15 +100,42 @@ const phaseRows=[
 ['2027-11-28T03:24','nova'],['2027-12-06T05:22','crescente'],['2027-12-13T16:09','cheia'],['2027-12-20T09:11','minguante'],
 ['2027-12-27T20:12','nova']
 ];
-const phaseNames={nova:'Lua Nova',crescente:'Quarto Crescente',cheia:'Lua Cheia',minguante:'Quarto Minguante'};
+let phaseNames = window.LunarI18n.translations[
+  window.LunarI18n.getLanguage()
+].phases;
+document.addEventListener('lunar:languagechange', () => {
+  phaseNames = window.LunarI18n.translations[
+    window.LunarI18n.getLanguage()
+  ].phases;
+
+  renderPhase();
+});
 const phaseIcons={nova:'●',crescente:'◐',cheia:'○',minguante:'◑'};
 const phaseEvents=phaseRows.map(([utc,type])=>({date:new Date(utc+'Z'),type}));
 function localParts(date){const parts=new Intl.DateTimeFormat('en-CA',{timeZone:$('timezone').value,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(date);const v=Object.fromEntries(parts.map(p=>[p.type,p.value]));return {key:v.year+'-'+v.month+'-'+v.day,time:v.hour+':'+v.minute}}
 function selectedKey(){return '2027-'+String(state.month+1).padStart(2,'0')+'-'+String(state.day).padStart(2,'0')}
-function renderPhase(){updateMoonVisual();const today=selectedKey(),matches=phaseEvents.filter(p=>localParts(p.date).key===today);const current=Date.parse(today+'T12:00:00Z');const prev=[...phaseEvents].reverse().find(p=>p.date.getTime()<=current);const next=phaseEvents.find(p=>p.date.getTime()>current);const info=$('phase-info');info.replaceChildren();if(matches.length){matches.forEach(p=>{const line=document.createElement('p');line.className='phase-event';line.textContent=phaseIcons[p.type]+' '+phaseNames[p.type]+' — '+localParts(p.date).time+' ('+$('timezone').selectedOptions[0].text+')';info.append(line)})}else{const p=document.createElement('p');p.textContent='Nenhuma das quatro fases principais ocorre nesta data.';info.append(p)}const near=document.createElement('p');near.className='phase-near';near.textContent='Próxima fase: '+(next?phaseNames[next.type]+' — '+new Intl.DateTimeFormat('pt-BR',{timeZone:$('timezone').value,day:'2-digit',month:'long',hour:'2-digit',minute:'2-digit'}).format(next.date):'fora de 2027');info.append(near);document.querySelectorAll('#calendar-grid .day').forEach(b=>{const k='2027-'+String(state.month+1).padStart(2,'0')+'-'+String(Number(b.textContent)).padStart(2,'0');const ev=phaseEvents.find(p=>localParts(p.date).key===k);if(ev){b.classList.add('phase-day');const label=document.createElement('small');label.className='phase-marker';label.textContent=phaseIcons[ev.type];label.title=phaseNames[ev.type];b.append(label);b.setAttribute('aria-label',b.getAttribute('aria-label')+', '+phaseNames[ev.type])}})}
-/* Representação aproximada baseada na fração do ciclo sinódico entre Luas Novas.
+function renderPhase(){
+ updateMoonVisual();
+ const today=selectedKey(),matches=phaseEvents.filter(p=>localParts(p.date).key===today);
+ const current=Date.parse(today+'T12:00:00Z');
+ const upcoming=(state.month===0&&state.day===12)?[
+  {date:new Date('2027-01-26T14:32:00Z'),icon:'☾',label:window.LunarI18n.getLanguage()==='en'?'Moon in Gemini':'Lua em Gêmeos'},
+  {date:new Date('2027-01-22T08:17:00Z'),icon:'○',label:phaseNames.cheia},
+  {date:new Date('2027-01-29T21:49:00Z'),icon:'◑',label:phaseNames.minguante},
+  {date:new Date('2027-02-01T06:21:00Z'),icon:'♈',label:window.LunarI18n.getLanguage()==='en'?'Moon in Aries':'Lua em Áries'},
+ ]:[
+  ...phaseEvents.filter(p=>p.date.getTime()>current).map(p=>({date:p.date,icon:phaseIcons[p.type],label:phaseNames[p.type]})),
+  ...ingressEvents.filter(p=>p.date.getTime()>current).map(p=>({date:p.date,icon:ingressSymbols[p.sign],label:window.LunarI18n.getLanguage()==='en'?'Moon in '+ingressSignsEn[p.sign]:'Lua em '+ingressSigns[p.sign]}))
+ ].sort((a,b)=>a.date-b.date).slice(0,4);
+ const info=$('phase-info');info.replaceChildren();
+ upcoming.forEach(event=>{const row=document.createElement('div');row.className='movement-row';const icon=document.createElement('span');icon.className='movement-row-icon';icon.textContent=event.icon;const text=document.createElement('span');text.className='movement-row-text';text.innerHTML='<strong>'+event.label+'</strong><small>'+new Intl.DateTimeFormat('pt-BR',{timeZone:$('timezone').value,day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}).format(event.date)+'</small>';row.append(icon,text);info.append(row)});
+ if(matches.length){matches.forEach(p=>{const line=document.createElement('p');line.className='phase-event';line.textContent=phaseIcons[p.type]+' '+phaseNames[p.type]+' — '+localParts(p.date).time;info.prepend(line)})}
+ decorateCalendarDays();
+}
+/* Representação aproximada/* Representação aproximada baseada na fração do ciclo sinódico entre Luas Novas.
    Não substitui efemérides de posição/iluminação lunar de alta precisão. */
 function updateMoonVisual(){
+  
  const selected=new Date(Date.UTC(2027,state.month,state.day,12));
  const newMoons=phaseEvents.filter(e=>e.type==='nova').map(e=>e.date.getTime());
  const anchor=Date.parse('2026-12-09T00:00:00Z');
@@ -86,10 +156,58 @@ function updateMoonVisual(){
  disk.style.setProperty('--moon-fraction',String(fraction));
  const stage=fraction<.035||fraction>.965?'Lua Nova':fraction<.215?'Lua Crescente':fraction<.285?'Quarto Crescente':fraction<.465?'Gibosa Crescente':fraction<.535?'Lua Cheia':fraction<.715?'Gibosa Minguante':fraction<.785?'Quarto Minguante':'Lua Minguante';
  $('moon-visual-label').textContent=stage+' · iluminação estimada: '+Math.round(illuminated*100)+'%';
- disk.setAttribute('aria-label',stage+', iluminação aproximada '+Math.round(illuminated*100)+' por cento');
+ const phaseAsset={
+  'Lua Nova':'01_lua_nova.png','Lua Crescente':'02_lua_crescente.png','Quarto Crescente':'03_quarto_crescente.png','Gibosa Crescente':'04_gibosa_crescente.png',
+  'Lua Cheia':'05_lua_cheia.png','Gibosa Minguante':'06_gibosa_minguante.png','Quarto Minguante':'07_quarto_minguante.png','Lua Minguante':'08_lua_minguante.png'
+ }[stage];
+ const todayMoon=$('today-moon-image');if(todayMoon){todayMoon.src='assets/moon-phases/'+phaseAsset;todayMoon.alt=stage}
+  const isEnglish = window.LunarI18n.getLanguage() === 'en';
+ const todayStage = $('today-moon-stage');
+
+if (todayStage) {
+  const phaseNamesEn = {
+    'Lua Nova': 'New Moon',
+    'Lua Crescente': 'Waxing Moon',
+    'Quarto Crescente': 'First Quarter',
+    'Gibosa Crescente': 'Waxing Gibbous',
+    'Lua Cheia': 'Full Moon',
+    'Gibosa Minguante': 'Waning Gibbous',
+    'Quarto Minguante': 'Last Quarter',
+    'Lua Minguante': 'Waning Moon'
+  };
+
+  
+
+  todayStage.textContent =
+    state.month === 0 && state.day === 12
+      ? (isEnglish ? 'Waxing Moon in Taurus' : 'Lua Crescente em Touro')
+      : (isEnglish ? (phaseNamesEn[stage] || stage) : stage);
+}
+
+ const todayDate = $('today-moon-date');
+
+if (todayDate) {
+  if (state.month === 0 && state.day === 12) {
+    todayDate.innerHTML = isEnglish
+      ? 'Since Jan 12, 04:27<br>Until Jan 14, 17:19'
+      : 'Desde 12 jan, 04h27<br>Até 14 jan, 17h19';
+  } else {
+    todayDate.textContent =
+      window.LunarI18n.translations[
+        window.LunarI18n.getLanguage()
+      ].selectedDate +
+      ': ' +
+      String(state.day).padStart(2, '0') +
+      ' ' +
+      months[state.month] +
+      ' 2027';
+  }
+}
+ const todaySign=$('today-moon-sign');if(todaySign){const latest=[...ingressEvents].reverse().find(e=>localParts(e.date).key<=selectedKey());todaySign.textContent=(state.month===0&&state.day>=12&&state.day<=14)?'♉':latest?ingressSymbols[latest.sign]:'✦'}
+ disk.setAttribute('aria-label', stage + ', ' + window.LunarI18n.translations[window.LunarI18n.getLanguage()].estimatedIllumination + ' ' + Math.round(illuminated * 100) + ' por cento');
  const x= Math.cos(2*Math.PI*fraction);
  const rx=Math.max(.01,Math.abs(x)*48);const lit='#ead49e',dark='#102b20';const right=waxing;const outer=right?'M 48 0 A 48 48 0 0 1 48 96':'M 48 0 A 48 48 0 0 0 48 96';const sweep=(x>=0)!==right?1:0;const path=outer+' A '+rx+' 48 0 0 '+sweep+' 48 0 Z';disk.innerHTML='<svg viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="48" fill="'+dark+'"/><path d="'+path+'" fill="'+lit+'"/></svg>';
-}
+document.dispatchEvent(new Event('lunar:calendarupdated'));}
 /* PRÉVIA TÉCNICA — janeiro a dezembro de 2027.
    Lua geocêntrica, zodíaco tropical, fronteiras de 30 graus.
    Calculado com PySwissEph 2.10.03, modo Moshier (FLG_MOSEPH),
@@ -97,6 +215,7 @@ function updateMoonVisual(){
    Pendente confronto independente antes de lançamento comercial. */
 const ingressSymbols=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];
 const ingressSigns=['Áries','Touro','Gêmeos','Câncer','Leão','Virgem','Libra','Escorpião','Sagitário','Capricórnio','Aquário','Peixes'];
+const ingressSignsEn = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'];
 const ingressRows=[
 ['2027-01-01T10:15',7],['2027-01-03T20:57',8],['2027-01-06T09:17',9],['2027-01-08T22:10',10],
 ['2027-01-11T10:35',11],['2027-01-13T21:13',0],['2027-01-16T04:43',1],['2027-01-18T08:32',2],
@@ -233,9 +352,24 @@ function renderIngress(){
  const latest=[...ingressEvents].reverse().find(e=>localParts(e.date).key<=day);
  const transitionToday=matches.length>0;
  $('zodiac-symbol').textContent=transitionToday?'◐':latest?ingressSymbols[latest.sign]:'✧';
- $('zodiac-name').textContent=transitionToday?'Mudança de signo neste dia':latest?'Lua em '+ingressSigns[latest.sign]:'Posição não disponível';
+ $('zodiac-name').textContent = transitionToday ? (window.LunarI18n.getLanguage() === 'en' ? 'Moon changes sign today' : 'Mudança de signo neste dia') : latest ? (window.LunarI18n.getLanguage() === 'en' ? 'Moon in ' + ingressSignsEn[latest.sign] : 'Lua em ' + ingressSigns[latest.sign]) : (window.LunarI18n.getLanguage() === 'en' ? 'Position unavailable' : 'Posição não disponível');
  $('zodiac-status').textContent=transitionToday?'Consulte o horário do ingresso abaixo; o signo varia ao longo do dia':latest?'Posição lunar calculada para a data selecionada':'Aguardando efemérides verificadas';
  const title=document.createElement('p');title.textContent='Ingressos lunares — zodíaco tropical:';el.append(title);
  if(matches.length){for(const event of matches){const p=document.createElement('p');p.textContent='Lua entra em '+ingressSigns[event.sign]+' às '+localParts(event.date).time+' ('+$('timezone').selectedOptions[0].text+')';el.append(p)}}else{const p=document.createElement('p');p.textContent='Nenhum ingresso registrado nesta data.';el.append(p)}
 }
+function decorateCalendarDays(){
+ document.querySelectorAll('#calendar-grid .day').forEach(b=>{
+  b.querySelectorAll('.day-meta').forEach(x=>x.remove());
+  const d=Number(b.firstChild?.textContent||b.textContent);if(!d)return;
+  const k='2027-'+String(state.month+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+  const phase=phaseEvents.find(p=>localParts(p.date).key===k);
+  const sign=ingressEvents.find(p=>localParts(p.date).key===k);
+  if(!phase&&!sign)return;
+  const meta=document.createElement('small');meta.className='day-meta';
+ if(sign){const item=document.createElement('span');item.textContent=ingressSymbols[sign.sign]+' '+(window.LunarI18n.getLanguage()==='en'?ingressSignsEn[sign.sign]:ingressSigns[sign.sign]);meta.append(item)}
+  if(phase){const item=document.createElement('span');const icon=document.createElement('img');const phaseFiles={nova:'01_nova.svg',crescente:'03_quarto_crescente.svg',cheia:'05_cheia.svg',minguante:'07_quarto_minguante.svg'};icon.src='assets/moon-phases/'+phaseFiles[phase.type];icon.alt='';icon.setAttribute('aria-hidden','true');item.append(icon,document.createTextNode(phaseNames[phase.type]));meta.append(item)}
+  b.append(meta);
+ });
+}
+
 render();

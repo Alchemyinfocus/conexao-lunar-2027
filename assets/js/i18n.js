@@ -1,0 +1,357 @@
+
+'use strict';
+
+(function () {
+  const STORAGE_KEY = 'alchemy-lunar-2027:language';
+
+  const translations = {
+    pt: {
+      heroTitle: 'Conexão Lunar 2027',
+heroSubtitle: 'PLANNER · CALENDÁRIO · CICLOS · DIÁRIO',
+heroDescription: 'Acompanhe a Lua, compreenda seus ciclos e caminhe em sintonia com o tempo natural.',
+      home: 'Início',
+      calendar: 'Calendário',
+      cycles: 'Ciclos',
+      diary: 'Diário Lunar',
+      diaryTitle: 'MEU DIÁRIO LUNAR',
+diaryPlaceholder: 'Registre suas observações e intenções...',
+diaryStorageNote: 'As notas são salvas neste navegador',
+diaryExport: 'Exportar notas',
+diaryRestore: 'Restaurar backup',
+      cardCalendarTitle: 'Calendário Anual',
+cardCalendarSubtitle: '2027',
+cardPhasesTitle: 'Fases da Lua',
+      phasesPageTitle: 'Fases da Lua · 2027',
+phasesPageDescription: 'Calendário completo das quatro fases principais da Lua, com datas e horários ajustados ao seu fuso horário.',
+phasesSelectMonth: 'Selecione o mês',
+phasesTimezone: 'Fuso horário',
+phasesSource: 'Fonte das fases principais: U.S. Naval Observatory (USNO), tabela de 2027 em UTC. Os horários apresentados são convertidos para o fuso escolhido. Os símbolos são representações gráficas, não fotografias da Lua.',
+backToHome: 'Voltar à Página Principal',
+cardPhasesSubtitle: 'Datas e horários',
+cardIngressesTitle: 'Ingressos nos Signos',
+cardIngressesSubtitle: 'Toda a programação',
+cardDiaryTitle: 'Diário Lunar',
+cardDiarySubtitle: 'Registros e reflexões',
+cardPlanningTitle: 'Planejamento',
+cardPlanningSubtitle: 'Por ciclos lunares',
+cardSettingsTitle: 'Configurações',
+cardSettingsSubtitle: 'Preferências e dados',
+      planning: 'Planejamento',
+      settings: 'Configurações',
+      moonToday: 'A LUA HOJE',
+cycleEnergy: 'ENERGIA DO CICLO',
+      upcomingEvents: 'PRÓXIMOS MOVIMENTOS',
+      moonIn: 'Lua em',
+since: 'Desde',
+until: 'Até',
+selectedDate: 'Data selecionada',
+estimatedIllumination: 'iluminação estimada',
+      
+calendarNote: 'Datas civis verificadas pelo calendário gregoriano. Fases principais: Observatório Naval dos EUA (USNO).',
+
+      months: [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril',
+        'Maio', 'Junho', 'Julho', 'Agosto',
+        'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ],
+      weekdays: [
+        'Domingo', 'Segunda-feira', 'Terça-feira',
+        'Quarta-feira', 'Quinta-feira', 'Sexta-feira',
+        'Sábado'
+      ],
+      phases: {
+        nova: 'Lua Nova',
+        crescente: 'Quarto Crescente',
+        cheia: 'Lua Cheia',
+        minguante: 'Quarto Minguante'
+      },
+          cycleMessages: {
+      'Lua Nova': 'Um novo ciclo começa. Recolha-se, escute sua intuição e plante suas intenções.',
+      'Lua Crescente': 'Suas intenções começam a ganhar forma. Cultive a confiança e dê os primeiros passos.',
+      'Quarto Crescente': 'É tempo de agir, enfrentar obstáculos e fortalecer suas decisões.',
+      'Gibosa Crescente': 'Aprimore seus planos, ajuste os detalhes e prepare-se para os resultados.',
+      'Lua Cheia': 'Um momento de plenitude e revelação. Reconheça suas conquistas e acolha suas emoções.',
+      'Gibosa Minguante': 'Compartilhe aprendizados, pratique a gratidão e reconheça o que amadureceu.',
+      'Quarto Minguante': 'Reavalie suas escolhas, libere o que não serve mais e reorganize suas prioridades.',
+      'Lua Minguante': 'Desacelere, descanse e permita que o silêncio prepare o próximo recomeço.'
+    },
+    },
+
+    en: {
+      heroTitle: 'Lunar Connection 2027',
+heroSubtitle: 'PLANNER · CALENDAR · CYCLES · JOURNAL',
+heroDescription: 'Follow the Moon, understand its cycles, and move in harmony with the natural rhythm of time.',
+      home: 'Home',
+      calendar: 'Calendar',
+      cycles: 'Cycles',
+      diary: 'Lunar Journal',
+      diaryTitle: 'MY LUNAR JOURNAL',
+diaryPlaceholder: 'Record your observations and intentions...',
+diaryStorageNote: 'Notes are saved in this browser',
+diaryExport: 'Export notes',
+diaryRestore: 'Restore backup',
+      cardCalendarTitle: 'Annual Calendar',
+cardCalendarSubtitle: '2027',
+cardPhasesTitle: 'Moon Phases',
+      phasesPageTitle: 'Moon Phases · 2027',
+phasesPageDescription: 'Complete calendar of the Moon’s four major phases, with dates and times adjusted to your time zone.',
+phasesSelectMonth: 'Select month',
+phasesTimezone: 'Time zone',
+phasesSource: 'Main lunar phase source: U.S. Naval Observatory (USNO), 2027 table in UTC. Displayed times are converted to the selected time zone. The symbols are graphical representations, not photographs of the Moon.',
+backToHome: 'Back to Home',
+cardPhasesSubtitle: 'Dates and times',
+cardIngressesTitle: 'Zodiac Ingresses',
+cardIngressesSubtitle: 'Full schedule',
+cardDiaryTitle: 'Lunar Journal',
+cardDiarySubtitle: 'Notes and reflections',
+cardPlanningTitle: 'Planning',
+cardPlanningSubtitle: 'By lunar cycles',
+cardSettingsTitle: 'Settings',
+cardSettingsSubtitle: 'Preferences and data',
+      planning: 'Planning',
+      settings: 'Settings',
+      moonToday: 'THE MOON TODAY',
+cycleEnergy: 'CYCLE ENERGY',
+      upcomingEvents: 'UPCOMING EVENTS',
+      moonIn: 'Moon in',
+since: 'Since',
+until: 'Until',
+selectedDate: 'Selected date',
+estimatedIllumination: 'estimated illumination',
+      
+calendarNote: 'Civil dates verified against the Gregorian calendar. Main lunar phases: United States Naval Observatory (USNO).',
+
+      months: [
+        'January', 'February', 'March', 'April',
+        'May', 'June', 'July', 'August',
+        'September', 'October', 'November', 'December'
+      ],
+      weekdays: [
+        'Sunday', 'Monday', 'Tuesday',
+        'Wednesday', 'Thursday', 'Friday',
+        'Saturday'
+      ],
+      phases: {
+        nova: 'New Moon',
+        crescente: 'First Quarter',
+        cheia: 'Full Moon',
+        minguante: 'Last Quarter'
+      },
+          cycleMessages: {
+      'Lua Nova': 'A new cycle begins. Turn inward, listen to your intuition, and plant your intentions.',
+      'Lua Crescente': 'Your intentions begin to take shape. Cultivate confidence and take the first steps.',
+      'Quarto Crescente': 'It is time to act, face obstacles, and strengthen your decisions.',
+      'Gibosa Crescente': 'Refine your plans, adjust the details, and prepare for the results.',
+      'Lua Cheia': 'A moment of fullness and revelation. Recognize your achievements and embrace your emotions.',
+      'Gibosa Minguante': 'Share what you have learned, practice gratitude, and acknowledge your growth.',
+      'Quarto Minguante': 'Reevaluate your choices, release what no longer serves you, and reorganize your priorities.',
+      'Lua Minguante': 'Slow down, rest, and allow silence to prepare the next beginning.'
+    },
+    }
+  };
+
+  let currentLanguage = 'pt';
+
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved === 'pt' || saved === 'en') {
+      currentLanguage = saved;
+    }
+  } catch (error) {
+    // Mantém português se o armazenamento falhar.
+  }
+
+  function translate(key) {
+    return translations[currentLanguage][key] || key;
+  }
+
+  function getLanguage() {
+    return currentLanguage;
+  }
+
+  function setLanguage(language) {
+    if (!translations[language]) return;
+
+    currentLanguage = language;
+    document.documentElement.lang =
+      language === 'pt' ? 'pt-BR' : 'en';
+
+    try {
+      localStorage.setItem(STORAGE_KEY, language);
+    } catch (error) {
+      // A troca continua funcionando sem armazenamento.
+    }
+
+    document.dispatchEvent(
+      new CustomEvent('lunar:languagechange', {
+        detail: { language }
+      })
+    );
+  }
+
+  document.documentElement.lang =
+    currentLanguage === 'pt' ? 'pt-BR' : 'en';
+
+  window.LunarI18n = {
+    translate,
+    getLanguage,
+    setLanguage,
+    translations
+  };
+  
+  function updateLanguageButtons() {
+    const ptButton = document.getElementById('lang-pt');
+    const enButton = document.getElementById('lang-en');
+
+    if (!ptButton || !enButton) return;
+
+    ptButton.classList.toggle('lang-active', currentLanguage === 'pt');
+    enButton.classList.toggle('lang-active', currentLanguage === 'en');
+
+    ptButton.setAttribute('aria-pressed', String(currentLanguage === 'pt'));
+    enButton.setAttribute('aria-pressed', String(currentLanguage === 'en'));
+  }
+
+  function updateNavigationLanguage() {
+    const labels = {
+      home: 'home',
+      calendar: 'calendar',
+      phases: 'cycles',
+      diary: 'diary',
+      planning: 'planning'
+    };
+
+    document.querySelectorAll('.approved-nav nav a[data-feature]').forEach(link => {
+      const key = labels[link.dataset.feature];
+
+      if (key) {
+        link.textContent = translate(key);
+      }
+    });
+  }
+  function updateMoonTodayLanguage() {
+  const title = document.getElementById('moon-today-title');
+
+  if (title) {
+    title.textContent = translate('moonToday');
+  }
+    const cycleEnergyLabel = document.getElementById('cycle-energy-label');
+
+if (cycleEnergyLabel) {
+  cycleEnergyLabel.textContent = translate('cycleEnergy');
+}
+const calendarNote = document.getElementById('calendar-note');
+
+if (calendarNote) {
+  calendarNote.textContent = translate('calendarNote');
+}
+
+const upcomingTitle = document.getElementById('upcoming-title');
+    
+
+if (upcomingTitle) {
+  upcomingTitle.textContent = translate('upcomingEvents');
+}
+    
+  const cycleMessage = document.getElementById('cycle-message');
+
+  if (cycleMessage) {
+    const stage = document.getElementById('today-moon-stage');
+    const language = getLanguage();
+    const messages = translations[language].cycleMessages;
+
+    if (stage && messages) {
+    const phase = stage.textContent
+  .replace(/\s+(?:in|em)\s+.+$/i, '')
+  .trim();
+      const phaseKeys = Object.keys(translations.pt.cycleMessages);
+      const englishPhases = {
+        'New Moon': 'Lua Nova',
+        'Waxing Moon': 'Lua Crescente',
+        'First Quarter': 'Quarto Crescente',
+        'Waxing Gibbous': 'Gibosa Crescente',
+        'Full Moon': 'Lua Cheia',
+        'Waning Gibbous': 'Gibosa Minguante',
+        'Last Quarter': 'Quarto Minguante',
+        'Waning Moon': 'Lua Minguante'
+      };
+
+      const phaseKey = englishPhases[phase] || phase;
+      if (phaseKeys.includes(phaseKey)) {
+        cycleMessage.textContent = messages[phaseKey];
+      }
+    }
+  }
+
+}
+function updateHomeCardsLanguage() {
+  const keys = [
+    ['cardCalendarTitle', 'cardCalendarSubtitle'],
+    ['cardPhasesTitle', 'cardPhasesSubtitle'],
+    ['cardIngressesTitle', 'cardIngressesSubtitle'],
+    ['cardDiaryTitle', 'cardDiarySubtitle'],
+    ['cardPlanningTitle', 'cardPlanningSubtitle'],
+    ['cardSettingsTitle', 'cardSettingsSubtitle']
+  ];
+
+  const cards = document.querySelectorAll(
+  '.rebuild-feature-grid a'
+  );
+
+  if (cards.length !== 6) return;
+
+  cards.forEach((card, index) => {
+    const title = card.querySelector('strong');
+    const subtitle = card.querySelector('small');
+
+    if (title) title.textContent = translate(keys[index][0]);
+    if (subtitle) subtitle.textContent = translate(keys[index][1]);
+  });
+}
+
+document.addEventListener(
+  'lunar:languagechange',
+  updateHomeCardsLanguage
+);
+document.addEventListener(
+  'DOMContentLoaded',
+  updateHomeCardsLanguage
+);
+  document.addEventListener('lunar:languagechange', updateNavigationLanguage);
+  document.addEventListener('DOMContentLoaded', updateNavigationLanguage);
+document.addEventListener('lunar:languagechange', updateMoonTodayLanguage);
+document.addEventListener('DOMContentLoaded', updateMoonTodayLanguage);
+  document.addEventListener('lunar:calendarupdated', updateMoonTodayLanguage);
+  function initializeLanguageButtons() {
+    const ptButton = document.getElementById('lang-pt');
+    const enButton = document.getElementById('lang-en');
+
+    if (!ptButton || !enButton) return;
+
+    ptButton.addEventListener('click', () => setLanguage('pt'));
+    enButton.addEventListener('click', () => setLanguage('en'));
+
+    document.addEventListener('lunar:languagechange', updateLanguageButtons);
+
+    updateLanguageButtons();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeLanguageButtons);
+  } else {
+    initializeLanguageButtons();
+  }
+
+function updateHeroLanguage() {
+  const title = document.getElementById('landing-title');
+  const subtitle = document.querySelector('.approved-hero-kicker');
+  const description = document.querySelector('.approved-hero-subtitle');
+
+  if (title) title.textContent = translate('heroTitle');
+  if (subtitle) subtitle.textContent = translate('heroSubtitle');
+  if (description) description.textContent = translate('heroDescription');
+}
+
+document.addEventListener('lunar:languagechange', updateHeroLanguage);
+document.addEventListener('DOMContentLoaded', updateHeroLanguage);
+  })();

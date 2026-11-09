@@ -1,3 +1,4 @@
+
 {
   "name": "Conexão Lunar 2027 — Alchemy in Focus",
   "short_name": "Conexão Lunar",
@@ -8,10 +9,22 @@
   "theme_color": "#102c20",
   "icons": [
     {
-      "src": "assets/icons/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "assets/icons/conexao-lunar-icon-192-corrigido.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "assets/icons/conexao-lunar-icon-512-corrigido.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/conexao-lunar-icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
