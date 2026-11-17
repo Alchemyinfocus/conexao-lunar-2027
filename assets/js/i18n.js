@@ -171,7 +171,7 @@ calendarNote: 'Datas civis verificadas pelo calendário gregoriano. Fases princi
     },
 
     en: {
-      diaryPageTitle: "My Lunar Journal · 2027",
+      diaryPageTitle: "Meu Diário Lunar · 2027",
       diaryPageDescription: "A space to record insights, intentions, and reflections throughout the year.",
       diaryDate: "Choose a date",
       diaryNotes: "My notes",
