@@ -55,10 +55,11 @@ $('prev').onclick=()=>changeMonth(-1);$('next').onclick=()=>changeMonth(1);$('no
 
 const notePrefix='alchemy-lunar-2027:nota:';
 const planningPrefix='alchemy-lunar-2027:planning:';
+const backupText = window.LunarI18n.translate;
 $('backup').onclick=()=>{
  const notes={},planning={};
  try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith(notePrefix))notes[k]=localStorage.getItem(k);else if(k&&k.startsWith(planningPrefix))planning[k]=JSON.parse(localStorage.getItem(k))}}
- catch(e){alert('Não foi possível preparar o backup completo.');return}
+ catch(e){alert(backupText('backupExportFailed'));return}
  const data=JSON.stringify({format:'alchemy-lunar-2027-backup-v2',notes,planning},null,2);
  const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);
  const a=document.createElement('a');a.href=url;a.download='conexao-lunar-2027-backup.json';a.click();window.lunarMarkBackup?.();setTimeout(()=>URL.revokeObjectURL(url),1000);
@@ -66,20 +67,20 @@ $('backup').onclick=()=>{
 $('restore').onchange=async e=>{
  const file=e.target.files&&e.target.files[0];if(!file)return;
  try{
-  if(file.size>5*1024*1024)throw Error('Arquivo maior que 5 MB');
+  if(file.size>5*1024*1024)throw Error(backupText('backupTooLarge'));
   const data=JSON.parse(await file.text());
-  if(!data||!['alchemy-lunar-2027-backup-v1','alchemy-lunar-2027-backup-v2'].includes(data.format)||!data.notes||typeof data.notes!=='object'||Array.isArray(data.notes))throw Error('Backup inválido');
+  if(!data||!['alchemy-lunar-2027-backup-v1','alchemy-lunar-2027-backup-v2'].includes(data.format)||!data.notes||typeof data.notes!=='object'||Array.isArray(data.notes))throw Error(backupText('backupInvalidFormat'));
   const notes=Object.entries(data.notes);
-  if(notes.length>366||!notes.every(([k,v])=>/^alchemy-lunar-2027:nota:(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.test(k)&&typeof v==='string'&&v.length<=100000))throw Error('Notas inválidas');
+  if(notes.length>366||!notes.every(([k,v])=>/^alchemy-lunar-2027:nota:(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.test(k)&&typeof v==='string'&&v.length<=100000))throw Error(backupText('backupInvalidNotes'));
   const planning=data.format==='alchemy-lunar-2027-backup-v2'?data.planning:{};
-  if(!planning||typeof planning!=='object'||Array.isArray(planning))throw Error('Planejamento inválido');
+  if(!planning||typeof planning!=='object'||Array.isArray(planning))throw Error(backupText('backupInvalidPlanning'));
   const plans=Object.entries(planning);
-  if(plans.length>12||!plans.every(([k,p])=>/^alchemy-lunar-2027:planning:(0[1-9]|1[0-2])$/.test(k)&&p&&typeof p==='object'&&!Array.isArray(p)&&['intentions','priorities','reflections'].every(n=>typeof p[n]==='string'&&p[n].length<=100000)&&Array.isArray(p.tasks)&&p.tasks.length<=300&&p.tasks.every(t=>t&&typeof t.text==='string'&&t.text.length<=200&&typeof t.done==='boolean')))throw Error('Dados de planejamento inválidos');
-  if(!confirm('Restaurar '+notes.length+' notas e '+plans.length+' meses de planejamento? Registros existentes nas mesmas datas e meses serão substituídos.'))return;
+  if(plans.length>12||!plans.every(([k,p])=>/^alchemy-lunar-2027:planning:(0[1-9]|1[0-2])$/.test(k)&&p&&typeof p==='object'&&!Array.isArray(p)&&['intentions','priorities','reflections'].every(n=>typeof p[n]==='string'&&p[n].length<=100000)&&Array.isArray(p.tasks)&&p.tasks.length<=300&&p.tasks.every(t=>t&&typeof t.text==='string'&&t.text.length<=200&&typeof t.done==='boolean')))throw Error(backupText('backupInvalidMonthlyPlan'));
+  if(!confirm(backupText('backupConfirm').replace('{notes}', notes.length).replace('{plans}', plans.length)))return;
   for(const [k,v] of notes)localStorage.setItem(k,v);
   for(const [k,v] of plans)localStorage.setItem(k,JSON.stringify(v));
-  window.lunarMarkUnsaved?.();loadNote();window.dispatchEvent(new Event('alchemy-lunar-backup-restored'));alert('Backup restaurado com sucesso.');
- }catch(err){alert('Falha na restauração: '+err.message)}finally{e.target.value=''}
+  window.lunarMarkUnsaved?.();loadNote();window.dispatchEvent(new Event('alchemy-lunar-backup-restored'));alert(backupText('backupRestoreSuccess'));
+ }catch(err){alert(backupText('backupRestoreError')+(err instanceof SyntaxError ? backupText('backupInvalidJson') : err.message))}finally{e.target.value=''}
 };
 
 /* Fases principais 2027 em UTC, US Naval Observatory:
